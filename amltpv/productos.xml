@@ -1,0 +1,791 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_13" class="java.beans.XMLDecoder"> 
+ <object class="amltpv.ProductosModel"> 
+  <void property="productosHash"> 
+   <void method="put"> 
+    <string>dsdd</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>Zumoraadfad</string> 
+    <float>2.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>dfd</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>jjghds</string> 
+    <float>2.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>Té Blanco Perla F.</string> 
+    <float>2.7</float> 
+   </void> 
+   <void method="put"> 
+    <string>yyytyty</string> 
+    <float>2.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>hjghf</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>qerqre</string> 
+    <float>2.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>as</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>ds</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>...</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>nnn</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>Té Blanco</string> 
+    <float>2.7</float> 
+   </void> 
+   <void method="put"> 
+    <string>asdfadsf</string> 
+    <float>2.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>adfadsfafda</string> 
+    <float>2.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>vvcv</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>gds</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>vv</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>df</string> 
+    <float>2.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>gg</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>dd</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>adfadswew</string> 
+    <float>2.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>Zumora Narana</string> 
+    <float>2.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>ggg</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>Té Ceylan</string> 
+    <float>2.7</float> 
+   </void> 
+   <void method="put"> 
+    <string>dwwd</string> 
+    <float>2.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>tty</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>fdf</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>De 1 ingrediente</string> 
+    <float>3.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>cbc</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>jjjjj</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>Té Verde Japonés</string> 
+    <float>3.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>dfad</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>AAA</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>dds</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>Té Earl Grey</string> 
+    <float>2.7</float> 
+   </void> 
+   <void method="put"> 
+    <string>ff</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>hdgdfg</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>Té Verde Chino</string> 
+    <float>2.7</float> 
+   </void> 
+   <void method="put"> 
+    <string>adfad212</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>Té Darjeeling</string> 
+    <float>2.7</float> 
+   </void> 
+   <void method="put"> 
+    <string>dfasd</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>gfg</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>Té Jazmín</string> 
+    <float>2.9</float> 
+   </void> 
+   <void method="put"> 
+    <string>z</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>ddd</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>hghg</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>vvf</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>Té Rojo</string> 
+    <float>2.7</float> 
+   </void> 
+   <void method="put"> 
+    <string>adfasd</string> 
+    <float>2.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>s</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>dsd</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>sds</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>khkj</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>hffss</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>cnbc</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>dafdsfds</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>rerer</string> 
+    <float>2.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>hhh</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>sss</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>De 2 ingredientes</string> 
+    <float>3.5</float> 
+   </void> 
+   <void method="put"> 
+    <string>cvc</string> 
+    <float>12.0</float> 
+   </void> 
+   <void method="put"> 
+    <string>adfad</string> 
+    <float>12.0</float> 
+   </void> 
+  </void> 
+  <void property="rootNode"> 
+   <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+    <void property="userObject"> 
+     <string>Productos</string> 
+    </void> 
+    <void method="add"> 
+     <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+      <void property="userObject"> 
+       <string>Tes</string> 
+      </void> 
+      <void method="add"> 
+       <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+        <void property="userObject"> 
+         <string>Selección de tes</string> 
+        </void> 
+        <void method="add"> 
+         <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+          <void property="userObject"> 
+           <string>Té Blanco</string> 
+          </void> 
+         </object> 
+        </void> 
+        <void method="add"> 
+         <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+          <void property="userObject"> 
+           <string>Té Verde Japonés</string> 
+          </void> 
+         </object> 
+        </void> 
+        <void method="add"> 
+         <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+          <void property="userObject"> 
+           <string>Té Verde Chino</string> 
+          </void> 
+         </object> 
+        </void> 
+        <void method="add"> 
+         <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+          <void property="userObject"> 
+           <string>Té Rojo</string> 
+          </void> 
+         </object> 
+        </void> 
+        <void method="add"> 
+         <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+          <void property="userObject"> 
+           <string>Té Blanco Perla F.</string> 
+          </void> 
+         </object> 
+        </void> 
+        <void method="add"> 
+         <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+          <void property="userObject"> 
+           <string>Té Ceylan</string> 
+          </void> 
+         </object> 
+        </void> 
+        <void method="add"> 
+         <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+          <void property="userObject"> 
+           <string>Té Earl Grey</string> 
+          </void> 
+         </object> 
+        </void> 
+        <void method="add"> 
+         <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+          <void property="userObject"> 
+           <string>Té Darjeeling</string> 
+          </void> 
+         </object> 
+        </void> 
+        <void method="add"> 
+         <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+          <void property="userObject"> 
+           <string>Té Jazmín</string> 
+          </void> 
+         </object> 
+        </void> 
+        <void method="add"> 
+         <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+          <void property="userObject"> 
+           <string>adfad</string> 
+          </void> 
+         </object> 
+        </void> 
+        <void method="add"> 
+         <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+          <void property="userObject"> 
+           <string>adfad212</string> 
+          </void> 
+         </object> 
+        </void> 
+        <void method="add"> 
+         <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+          <void property="userObject"> 
+           <string>dds</string> 
+          </void> 
+         </object> 
+        </void> 
+        <void method="add"> 
+         <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+          <void property="userObject"> 
+           <string>dafdsfds</string> 
+          </void> 
+         </object> 
+        </void> 
+        <void method="add"> 
+         <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+          <void property="userObject"> 
+           <string>hdgdfg</string> 
+          </void> 
+         </object> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+        <void property="userObject"> 
+         <string>Tes de bi s</string> 
+        </void> 
+        <void method="add"> 
+         <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+          <void property="userObject"> 
+           <string>dfd</string> 
+          </void> 
+         </object> 
+        </void> 
+        <void method="add"> 
+         <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+          <void property="userObject"> 
+           <string>hjghf</string> 
+          </void> 
+         </object> 
+        </void> 
+        <void method="add"> 
+         <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+          <void property="userObject"> 
+           <string>tty</string> 
+          </void> 
+         </object> 
+        </void> 
+        <void method="add"> 
+         <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+          <void property="userObject"> 
+           <string>hhh</string> 
+          </void> 
+         </object> 
+        </void> 
+        <void method="add"> 
+         <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+          <void property="userObject"> 
+           <string>hffss</string> 
+          </void> 
+         </object> 
+        </void> 
+        <void method="add"> 
+         <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+          <void property="userObject"> 
+           <string>khkj</string> 
+          </void> 
+         </object> 
+        </void> 
+        <void method="add"> 
+         <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+          <void property="userObject"> 
+           <string>gds</string> 
+          </void> 
+         </object> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+        <void property="userObject"> 
+         <string>tes dsa</string> 
+        </void> 
+        <void method="add"> 
+         <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+          <void property="userObject"> 
+           <string>vacío</string> 
+          </void> 
+         </object> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+        <void property="userObject"> 
+         <string>ter</string> 
+        </void> 
+        <void method="add"> 
+         <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+          <void property="userObject"> 
+           <string>ds</string> 
+          </void> 
+         </object> 
+        </void> 
+        <void method="add"> 
+         <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+          <void property="userObject"> 
+           <string>dd</string> 
+          </void> 
+         </object> 
+        </void> 
+        <void method="add"> 
+         <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+          <void property="userObject"> 
+           <string>sds</string> 
+          </void> 
+         </object> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+        <void property="userObject"> 
+         <string>fds</string> 
+        </void> 
+        <void method="add"> 
+         <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+          <void property="userObject"> 
+           <string>gg</string> 
+          </void> 
+         </object> 
+        </void> 
+        <void method="add"> 
+         <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+          <void property="userObject"> 
+           <string>as</string> 
+          </void> 
+         </object> 
+        </void> 
+        <void method="add"> 
+         <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+          <void property="userObject"> 
+           <string>hghg</string> 
+          </void> 
+         </object> 
+        </void> 
+        <void method="add"> 
+         <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+          <void property="userObject"> 
+           <string>fdf</string> 
+          </void> 
+         </object> 
+        </void> 
+        <void method="add"> 
+         <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+          <void property="userObject"> 
+           <string>AAA</string> 
+          </void> 
+         </object> 
+        </void> 
+        <void method="add"> 
+         <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+          <void property="userObject"> 
+           <string>sss</string> 
+          </void> 
+         </object> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+        <void property="userObject"> 
+         <string>gsfd</string> 
+        </void> 
+        <void method="add"> 
+         <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+          <void property="userObject"> 
+           <string>vacío</string> 
+          </void> 
+         </object> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+        <void property="userObject"> 
+         <string>sdfasd</string> 
+        </void> 
+        <void method="add"> 
+         <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+          <void property="userObject"> 
+           <string>dsd</string> 
+          </void> 
+         </object> 
+        </void> 
+        <void method="add"> 
+         <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+          <void property="userObject"> 
+           <string>ff</string> 
+          </void> 
+         </object> 
+        </void> 
+        <void method="add"> 
+         <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+          <void property="userObject"> 
+           <string>s</string> 
+          </void> 
+         </object> 
+        </void> 
+        <void method="add"> 
+         <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+          <void property="userObject"> 
+           <string>gfg</string> 
+          </void> 
+         </object> 
+        </void> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="add"> 
+     <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+      <void property="userObject"> 
+       <string>Cafes</string> 
+      </void> 
+      <void method="add"> 
+       <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+        <void property="userObject"> 
+         <string>cvc</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+        <void property="userObject"> 
+         <string>nnn</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+        <void property="userObject"> 
+         <string>vv</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+        <void property="userObject"> 
+         <string>...</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+        <void property="userObject"> 
+         <string>cnbc</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+        <void property="userObject"> 
+         <string>cbc</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+        <void property="userObject"> 
+         <string>z</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+        <void property="userObject"> 
+         <string>vvcv</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+        <void property="userObject"> 
+         <string>vvf</string> 
+        </void> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="add"> 
+     <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+      <void property="userObject"> 
+       <string>Batidos</string> 
+      </void> 
+      <void method="add"> 
+       <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+        <void property="userObject"> 
+         <string>De 1 ingrediente</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+        <void property="userObject"> 
+         <string>dfad</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+        <void property="userObject"> 
+         <string>ddd</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+        <void property="userObject"> 
+         <string>ggg</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+        <void property="userObject"> 
+         <string>jjjjj</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+        <void property="userObject"> 
+         <string>dsdd</string> 
+        </void> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void method="add"> 
+     <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+      <void property="userObject"> 
+       <string>Zumos</string> 
+      </void> 
+      <void method="add"> 
+       <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+        <void property="userObject"> 
+         <string>Zumora Narana</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+        <void property="userObject"> 
+         <string>Zumoraadfad</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+        <void property="userObject"> 
+         <string>dwwd</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+        <void property="userObject"> 
+         <string>adfadswew</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+        <void property="userObject"> 
+         <string>jjghds</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+        <void property="userObject"> 
+         <string>rerer</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+        <void property="userObject"> 
+         <string>yyytyty</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+        <void property="userObject"> 
+         <string>qerqre</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+        <void property="userObject"> 
+         <string>dfasd</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+        <void property="userObject"> 
+         <string>adfadsfafda</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+        <void property="userObject"> 
+         <string>df</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+        <void property="userObject"> 
+         <string>asdfadsf</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void method="add"> 
+       <object class="javax.swing.tree.DefaultMutableTreeNode"> 
+        <void property="userObject"> 
+         <string>adfasd</string> 
+        </void> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+   </object> 
+  </void> 
+ </object> 
+</java> 
