@@ -186,11 +186,6 @@ public class AmltpvView extends FrameView {
         fileMenu.setText(resourceMap.getString("fileMenu.text")); // NOI18N
         fileMenu.setFont(resourceMap.getFont("fileMenu.font")); // NOI18N
         fileMenu.setName("fileMenu"); // NOI18N
-        fileMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fileMenuActionPerformed(evt);
-            }
-        });
 
         abrirNegocio.setFont(resourceMap.getFont("abrirNegocio.font")); // NOI18N
         abrirNegocio.setForeground(resourceMap.getColor("abrirNegocio.foreground")); // NOI18N
@@ -405,10 +400,6 @@ public class AmltpvView extends FrameView {
             pintarMesas();
         }
     }//GEN-LAST:event_abrirNegocioActionPerformed
-
-    private void fileMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileMenuActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fileMenuActionPerformed
 
     private void cierreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cierreActionPerformed
          CajaDialog dialog = new CajaDialog(this.getFrame(),true);

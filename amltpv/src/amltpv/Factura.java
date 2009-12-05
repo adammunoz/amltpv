@@ -69,6 +69,9 @@ public class Factura implements Printable{
         else if (remainder > 0){
             pages = pagesDiv +1;
         }
+        else{
+            pages = 1;
+        }
     }
 
     void drawHeader(int page){

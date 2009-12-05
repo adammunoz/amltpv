@@ -353,8 +353,10 @@ public class CajaDialog extends javax.swing.JDialog implements LoggedDialog{
         strings.put("cif", AmltpvView.db.queryValor("cif"));
         strings.put("email", AmltpvView.db.queryValor("email"));
         strings.put("web", AmltpvView.db.queryValor("web"));
-        Factura f = new Factura("Caja",facturaItemVec,resultadoStr,strings);
-        new Impresora().print(f);
+        Factura f = new Factura("Caja",facturaItemVec,resultadoStr,strings);      
+        Impresora impresora = new Impresora();
+        impresora.setSize(7.5,100);
+        impresora.print(f);
     }//GEN-LAST:event_printButtonActionPerformed
 
     private void doClose(int retStatus) {
