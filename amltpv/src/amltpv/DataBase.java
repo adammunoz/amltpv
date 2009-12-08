@@ -17,6 +17,8 @@ import java.math.BigDecimal;
 import java.util.Enumeration;
 import java.util.Vector;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import org.apache.commons.io.*;
 import javax.swing.JOptionPane;
@@ -31,6 +33,7 @@ public class DataBase {
     private Utils utils = AmltpvView.util;
     private String dbName = "baseDeDatos";
     private Boolean exists = false;
+    Connection conn=null;
     
     /*Constructor. Carga la base de datos*/
     public DataBase(){
@@ -69,7 +72,6 @@ public class DataBase {
     }
     Statement conectar(){
         try{
-            Connection conn = null;
             Statement s = null;
             Properties props = new Properties(); // connection properties
             // providing a user name and password is optional in the embedded
@@ -186,13 +188,26 @@ public class DataBase {
                 " from cambio where id=(select max(id) from cambio)";
         System.out.println(s);
         BigDecimal result = new BigDecimal(0);
+        Statement stat = conectar();
+        ResultSet rs = null;
         try{
-            ResultSet rs = conectar().executeQuery(s);
+            stat.executeQuery(s);
+            rs = stat.executeQuery(s);
             rs.next();
             result = rs.getBigDecimal(1);
         }
         catch(SQLException ex){
             ex.printStackTrace();
+        }
+        finally{
+            try {
+                stat.close();
+                rs.close();
+                conn.close();
+                System.out.println("Derby objects closed");
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         if (result == null){
             return new BigDecimal(0);
@@ -203,17 +218,26 @@ public class DataBase {
     void insertCambio(BigDecimal cambio, String fechaCierre,String horaCierre ){
         String fechaApertura = AmltpvView.util.getTodayString();
         String horaApertura = AmltpvView.util.getTimeString();
-        
+        Statement stat = conectar();
         try{
             String s = "INSERT INTO cambio VALUES(DEFAULT,'"+
                     fechaApertura+"','"+horaApertura+
                     "','"+ fechaCierre + "','"+
                     horaCierre +"'," + cambio + ")";
             System.out.println(s);
-            conectar().execute(s);
+            stat.execute(s);
         }
         catch (SQLException e){
             e.printStackTrace();
+        }
+        finally{
+            try {
+                stat.close();
+                conn.close();
+                System.out.println("Derby objects closed");
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -225,13 +249,25 @@ public class DataBase {
                 " and hora >= '" + horaApertura + "'";
         System.out.println(s);
         BigDecimal result = new BigDecimal(0);
+        Statement stat = conectar();
+        ResultSet rs = null;
         try{
-            ResultSet rs = conectar().executeQuery(s);
+            rs = stat.executeQuery(s);
             rs.next();
             result = rs.getBigDecimal(1);
         }
         catch (SQLException e){
             e.printStackTrace();
+        }
+        finally{
+            try {
+                stat.close();
+                rs.close();
+                conn.close();
+                System.out.println("Derby objects closed");
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         if (result == null){
             return new BigDecimal(0);
@@ -247,13 +283,25 @@ public class DataBase {
                 " and hora >= '" + horaApertura + "'";
         System.out.println(s);
         BigDecimal result = new BigDecimal(0);
+        Statement stat = conectar();
+        ResultSet rs = null;
         try{
-            ResultSet rs = conectar().executeQuery(s);
+            rs = stat.executeQuery(s);
             rs.next();
             result = rs.getBigDecimal(1);
         }
         catch (SQLException e){
             e.printStackTrace();
+        }
+        finally{
+            try {
+                stat.close();
+                rs.close();
+                conn.close();
+                System.out.println("Derby objects closed");
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         if (result == null){
             return new BigDecimal(0);
@@ -264,13 +312,23 @@ public class DataBase {
         System.out.println("Insetando apertura en base de datos");
         String fecha = AmltpvView.util.getTodayString();
         String hora = AmltpvView.util.getTimeString();
+        Statement stat = conectar();
         try{
             String s = "INSERT INTO caja VALUES(DEFAULT,'"+fecha+"','"+hora+"',null,null,null,null)";
             System.out.println(s);
-            conectar().execute(s);
+            stat.execute(s);
         }
         catch (SQLException e){
             JOptionPane.showMessageDialog(null, e);
+        }
+        finally{
+            try {
+                stat.close();
+                conn.close();
+                System.out.println("Derby objects closed");
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -279,28 +337,40 @@ public class DataBase {
         System.out.println("Insertando cierre en base de datos");
         String fecha = AmltpvView.util.getTodayString();
         String hora = AmltpvView.util.getTimeString();
+        Statement stat = conectar();
+        ResultSet rs = null;
         try{
             
-            ResultSet rs = conectar().executeQuery("select MAX(id) from caja");
+            rs = stat.executeQuery("select MAX(id) from caja");
             rs.next();
             int id = rs.getInt("1");
             
             
             String s = "UPDATE caja SET dia_cierre='"+fecha+"' WHERE id="+id;
             System.out.println(s);
-            conectar().execute(s);
+            stat.execute(s);
             s = "UPDATE caja SET hora_cierre='"+hora+"' WHERE id="+id;
             System.out.println(s);
-            conectar().execute(s);
+            stat.execute(s);
             s = "UPDATE caja SET firma_usuario='"+usuario+"' WHERE id="+id;
             System.out.println(s);
-            conectar().execute(s);
+            stat.execute(s);
             s = "UPDATE caja SET total="+total+" WHERE id="+id;
             System.out.println(s);
-            conectar().execute(s);
+            stat.execute(s);
         }
         catch (SQLException e){
             JOptionPane.showMessageDialog(null, e);
+        }
+        finally{
+            try {
+                stat.close();
+                rs.close();
+                conn.close();
+                System.out.println("Derby objects closed");
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     
@@ -308,23 +378,35 @@ public class DataBase {
         String s = "select " + campo + " from user1.caja where id=(select max(id) from user1.caja)";
         System.out.println(s);
         String result = null;
+        Statement stat = conectar();
+        ResultSet rs = null;
         try {
-            ResultSet rs = conectar().executeQuery(s);
+            rs = stat.executeQuery(s);
             rs.next();
             result = rs.getString(1);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        
+        finally{
+            try {
+                stat.close();
+                rs.close();
+                conn.close();
+                System.out.println("Derby objects closed");
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         return result;
     }
     
     void addProductoToMesasPool(String mesa,String producto,boolean cocina){
         System.out.println("adding producto called");
+        Statement stat = conectar();
         try{
             String s = "INSERT INTO mesas_pool VALUES('"+ mesa + "','" +producto + "')";
             System.out.println(s);
-            conectar().execute(s);
+            stat.execute(s);
             if (cocina){ //Si es una comanda que se envia a cocina y no algo relacionado con borrar
                 ThreadServidor.servidor.comandaCocina("comanda@"+mesa+"@"+producto);
                 AmltpvView.mesasArray[Integer.parseInt(mesa)].setIcon(new ImageIcon("imgs/mesaBusy.jpg"));
@@ -334,20 +416,39 @@ public class DataBase {
         catch (SQLException e){
             JOptionPane.showMessageDialog(null, e);
         }
+        finally{
+            try {
+                stat.close();
+                conn.close();
+                System.out.println("Derby objects closed");
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     void addGasto(String gasto,BigDecimal precio,String user){
         System.out.println("add gasto called");
         String dia = AmltpvView.util.getTodayString();
         String hora = AmltpvView.util.getTimeString();
+        Statement stat = conectar();
         try{
             String s = "INSERT INTO gastos VALUES('"+ dia +"','" +
                     hora + "','" +gasto + "'," + precio + ",'"+user+"')";
             System.out.println(s);
-            conectar().execute(s);
+            stat.execute(s);
         }
         catch (SQLException e){
             e.printStackTrace();
+        }
+        finally{
+            try {
+                stat.close();
+                conn.close();
+                System.out.println("Derby objects closed");
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -355,7 +456,8 @@ public class DataBase {
             String dia_cierre,String hora_cierre){
         
         Vector resultVector = new Vector();
-        
+        Statement stat = conectar();
+        ResultSet rs = null;
         try{
             String s = "select dia,hora,concepto,precio,firma_usuario from gastos where " +
                     "dia >= '" + dia_apertura + "'" +
@@ -363,7 +465,7 @@ public class DataBase {
                     " and dia <= '" + dia_cierre + "'" +
                     " and hora <= '" + hora_cierre + "'";
             System.out.println(s);
-            ResultSet rs = conectar().executeQuery(s);
+            rs = stat.executeQuery(s);
             Object[] temp = new Object[5];
             while (rs.next()){
                 temp[0] = rs.getObject(1);
@@ -378,38 +480,58 @@ public class DataBase {
         catch (SQLException e){
             e.printStackTrace();
         }
+        finally{
+            try {
+                stat.close();
+                rs.close();
+                conn.close();
+                System.out.println("Derby objects closed");
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         return resultVector;
 
     }
 
     void emptyPool(String mesa){
         System.out.println("emptying pool:"+mesa);
+        Statement stat = conectar();
         try{
             String s = "DELETE FROM mesas_pool WHERE mesa='"+mesa+"'";
             System.out.println(s);
-            conectar().execute(s);
+            stat.execute(s);
         }
         catch (SQLException e){
             JOptionPane.showMessageDialog(null, e);
         }
+        finally{
+            try {
+                stat.close();
+                conn.close();
+                System.out.println("Derby objects closed");
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     void fromPoolToCobradas(String mesa){
-        
-        ResultSet rs = null;
-        System.out.println("from pool to mesas called");
+        System.out.println("from pool to cobradas called");
         String s = "select * from mesas_pool where mesa='"+mesa+"'";
         System.out.println(s);
+        Statement stat = conectar();
+        ResultSet rs = null;
         try {
-            rs = conectar().executeQuery(s);
+            rs = stat.executeQuery(s);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         String dia = AmltpvView.util.getTodayString();
         String hora = AmltpvView.util.getTimeString();
         String producto = null;
-        BigDecimal precio;
-                
+        BigDecimal precio;                
+        Statement stat_update = conectar();
         try{
             while (rs.next()){
                 producto = rs.getString("producto");
@@ -422,21 +544,43 @@ public class DataBase {
                                     producto + "',"+
                                     precio + ")";
                 System.out.println(s);
-                conectar().execute(s);
+                stat_update.executeUpdate(s);
+                System.out.println("Finish from pool_to_mesas");
             }
         }
         catch (Exception ex){
             ex.printStackTrace();
         }
+        finally{
+            try {
+                stat.close();
+                stat_update.close();
+                rs.close();
+                conn.close();
+                System.out.println("Derby objects closed");
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
      void addHost(String hostname){
+        Statement stat = conectar();
         try{
             String s = "INSERT INTO hosts VALUES('"+ hostname + "')";
             System.out.println(s);
-            conectar().execute(s);
+            stat.execute(s);
         }
         catch (SQLException e){
             JOptionPane.showMessageDialog(null, e);
+        }
+        finally{
+            try {
+                stat.close();
+                conn.close();
+                System.out.println("Derby objects closed");
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -466,15 +610,25 @@ public class DataBase {
 
     void deleteFromMesasPool(String mesa, String producto) {
         int cant = queryCantOfProducto(mesa,producto);
+        Statement stat = conectar();
         try{
             String s = "DELETE FROM mesas_pool WHERE producto ='"+ producto + "'" +
                     "AND MESA='"+mesa+"'";
             System.out.println(s);
-            conectar().execute(s);
+            stat.execute(s);
             ThreadServidor.servidor.comandaCocina("borrar@"+mesa+"@"+producto);
         }
         catch (SQLException e){
             JOptionPane.showMessageDialog(null, e);
+        }
+        finally{
+            try {
+                stat.close();
+                conn.close();
+                System.out.println("Derby objects closed");
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         for (int i=0;i<cant-1;i++){
                 addProductoToMesasPool(mesa,producto,false);
@@ -482,47 +636,78 @@ public class DataBase {
 
     }
     void deleteHost(String hostname) {
+        Statement stat = conectar();
         try{
             String s = "DELETE FROM hosts WHERE hostname ='"+ hostname + "'";
             System.out.println(s);
-            conectar().execute(s);
+            stat.execute(s);
         }
         catch (SQLException e){
             JOptionPane.showMessageDialog(null, e);
         }
+        finally{
+            try {
+                stat.close();
+                conn.close();
+                System.out.println("Derby objects closed");
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
     String insertFromRemoteHost(String query){
+        Statement stat = conectar();
         try{
             System.out.println("Remote update query:" + query);
-            conectar().execute(query);
+            stat.execute(query);
             return "updated";
         }
         catch (SQLException e){
             AmltpvView.util.log(e+"-query:"+query);
             return "not updated";
+        }
+        finally{
+            try {
+                stat.close();
+                conn.close();
+                System.out.println("Derby objects closed");
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
     String deleteFromRemoteHost(String query) {
+        Statement stat = conectar();
         try{
             System.out.println("Remote update query:" + query);
-            conectar().execute(query);
+            stat.execute(query);
             return "updated";
         }
         catch (SQLException e){
             AmltpvView.util.log(e+"-query:"+query);
             return "not updated";
+        }
+        finally{
+            try {
+                stat.close();
+                conn.close();
+                System.out.println("Derby objects closed");
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
     Enumeration queryHosts(){
         String s;
-        ResultSet rs;
+        ResultSet rs = null;
+        Statement stat = conectar();
         Vector resultVector = new Vector();
         try{
             s = "SELECT hostname from hosts";
             System.out.println(s);
-            rs = conectar().executeQuery(s);
+            rs = stat.executeQuery(s);
             while (rs.next()){
                 resultVector.add(rs.getString("hostname"));
             }
@@ -530,16 +715,27 @@ public class DataBase {
         catch (SQLException e){
             JOptionPane.showMessageDialog(null, e);
         }
+        finally{
+            try {
+                stat.close();
+                rs.close();
+                conn.close();
+                System.out.println("Derby objects closed");
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         return resultVector.elements();
     }
     Enumeration queryMesaContents(String mesa){
         String s;
-        ResultSet rs;
+        ResultSet rs = null;
+        Statement stat = conectar();
         Vector resultVector = new Vector();
         try{
             s = "SELECT producto from mesas_pool WHERE mesa='" + mesa + "'";
             System.out.println(s);
-            rs = conectar().executeQuery(s);
+            rs = stat.executeQuery(s);
             while (rs.next()){
                 resultVector.add(rs.getString("producto"));
             }
@@ -547,31 +743,53 @@ public class DataBase {
         catch (SQLException e){
             JOptionPane.showMessageDialog(null, e);
         }
+        finally{
+            try {
+                stat.close();
+                rs.close();
+                conn.close();
+                System.out.println("Derby objects closed");
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         return resultVector.elements();
     }
     int queryCantOfProducto(String mesa,String producto){
         String s;
-        ResultSet rs;
+        ResultSet rs = null;
+        Statement stat = conectar();
         try{
             s = "SELECT count(producto) from mesas_pool WHERE producto='" + producto + "'" + "and mesa='" + mesa + "'";
             System.out.println(s);
-            rs = conectar().executeQuery(s);
+            rs = stat.executeQuery(s);
             rs.next();
             return rs.getInt(1);
         }
         catch (SQLException e){
             JOptionPane.showMessageDialog(null, e);
             return 0;
+        }
+        finally{
+            try {
+                stat.close();
+                rs.close();
+                conn.close();
+                System.out.println("Derby objects closed");
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
     int queryCantOfProductosInMesa(String mesa){
         String s;
-        ResultSet rs;
+        ResultSet rs = null;
+        Statement stat = conectar();
         try{
             s = "SELECT count(producto) from mesas_pool WHERE mesa='" + mesa + "'";
             System.out.println(s);
-            rs = conectar().executeQuery(s);
+            rs = stat.executeQuery(s);
             rs.next();
             return rs.getInt(1);
         }
@@ -579,62 +797,116 @@ public class DataBase {
             JOptionPane.showMessageDialog(null, e);
             return 0;
         }
+        finally{
+            try {
+                stat.close();
+                rs.close();
+                conn.close();
+                System.out.println("Derby objects closed");
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     void insertConfItem(String campo, String valor){
+        Statement stat = conectar();
         try{
             String s = "INSERT INTO conf VALUES('"+ campo + "','" + valor + "')";
             System.out.println(s);
-            conectar().execute(s);
+            stat.execute(s);
         }
         catch (SQLException e){
             JOptionPane.showMessageDialog(null, e);
+        }
+        finally{
+            try {
+                stat.close();
+                conn.close();
+                System.out.println("Derby objects closed");
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
     }
 
 
     void insertAuthItem(String usuario, String codigo, String role){
+        Statement stat1 = conectar();
+        Statement stat2 = conectar();
         try{
             String s = "INSERT INTO auth VALUES('"+ usuario + "','" + codigo + "')";
             //System.out.println(s); por seguridad no imprimimos
-            conectar().execute(s);
+            stat1.execute(s);
             s = "INSERT INTO roles VALUES('"+ usuario + "','" + role + "')";
             //System.out.println(s); por seguridad no imprimimos
-            conectar().execute(s);
+            stat2.execute(s);
         }
         catch (SQLException e){
             JOptionPane.showMessageDialog(null, e);
+        }
+        finally{
+            try {
+                stat1.close();
+                stat2.close();
+                conn.close();
+                System.out.println("Derby objects closed");
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
     }
 
     void insertRoleDisponible(String role,String peso){
+        Statement stat = conectar();
         try{
             String s = "INSERT INTO roles_disponibles VALUES('"+role+"',"+peso+")";
             //System.out.println(s); por seguridad no imprimimos
-            conectar().execute(s);
+            stat.execute(s);
         }
         catch (SQLException e){
             JOptionPane.showMessageDialog(null, e);
+        }
+        finally{
+            try {
+                stat.close();
+                conn.close();
+                System.out.println("Derby objects closed");
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     void updateConfItem(String campo, String valor){
+        Statement stat = conectar();
         try{
             String s = "UPDATE conf SET valor='"+valor+"' WHERE campo='"+campo+"'";
             System.out.println(s);
-            conectar().execute(s);
+            stat.execute(s);
         }
         catch (SQLException e){
             JOptionPane.showMessageDialog(null, e);
+        }
+        finally{
+            try {
+                stat.close();
+                conn.close();
+                System.out.println("Derby objects closed");
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
     String queryValor(String campo){
+        ResultSet rs = null;
+        Statement stat = conectar();
         try{
             String s = "SELECT valor from conf WHERE campo='" + campo + "'";
             System.out.println(s);
-            ResultSet rs = conectar().executeQuery(s);
+            rs = stat.executeQuery(s);
             rs.next();
             return rs.getString("valor");
         }
@@ -642,12 +914,24 @@ public class DataBase {
             JOptionPane.showMessageDialog(null, e);
             return null;
         }
+        finally{
+            try {
+                stat.close();
+                rs.close();
+                conn.close();
+                System.out.println("Derby objects closed");
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
     String queryCodigo(String usuario){
+        ResultSet rs = null;
+        Statement stat = conectar();
         try{
             String s = "SELECT codigo from auth WHERE usuario='" + usuario + "'";
             System.out.println(s);
-            ResultSet rs = conectar().executeQuery(s);
+            rs = stat.executeQuery(s);
             rs.next();
             return rs.getString("codigo");
         }
@@ -655,12 +939,24 @@ public class DataBase {
             JOptionPane.showMessageDialog(null, e);
             return null;
         }
+        finally{
+            try {
+                stat.close();
+                rs.close();
+                conn.close();
+                System.out.println("Derby objects closed");
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
     String queryRole(String usuario){
+        ResultSet rs = null;
+        Statement stat = conectar();
         try{
             String s = "SELECT role from roles WHERE usuario='" + usuario + "'";
             System.out.println(s);
-            ResultSet rs = conectar().executeQuery(s);
+            rs = stat.executeQuery(s);
             rs.next();
             return rs.getString("role");
         }
@@ -668,13 +964,25 @@ public class DataBase {
             e.printStackTrace();
             return null;
         }
+        finally{
+            try {
+                stat.close();
+                rs.close();
+                conn.close();
+                System.out.println("Derby objects closed");
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     BigDecimal queryPeso(String role){
+        ResultSet rs = null;
+        Statement stat = conectar();
         try{
             String s = "SELECT peso from roles_disponibles WHERE role='" + role + "'";
             System.out.println(s);
-            ResultSet rs = conectar().executeQuery(s);
+            rs = stat.executeQuery(s);
             rs.next();
             return rs.getBigDecimal("peso");
         }
@@ -682,18 +990,30 @@ public class DataBase {
             e.printStackTrace();
             return null;
         }
+        finally{
+            try {
+                stat.close();
+                rs.close();
+                conn.close();
+                System.out.println("Derby objects closed");
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     String [] queryAllUsuarios(){
+        ResultSet rs = null;
+        Statement stat = conectar();
         try{
             String s = "SELECT count(usuario) from auth";
-            ResultSet rs = conectar().executeQuery(s);
+            rs = stat.executeQuery(s);
             rs.next();
             int length = rs.getInt(1);
             System.out.println(length);
 
             s = "SELECT usuario from auth";
-            rs = conectar().executeQuery(s);
+            rs = stat.executeQuery(s);
             int i = 0;
             String[] a = new String[length];
 
@@ -708,19 +1028,31 @@ public class DataBase {
             e.printStackTrace();
             return null;
         }
+        finally{
+            try {
+                stat.close();
+                rs.close();
+                conn.close();
+                System.out.println("Derby objects closed");
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
 
     }
 
     String [] queryAllRoles(){
+        ResultSet rs = null;
+        Statement stat = conectar();
         try{
             String s = "SELECT count(role) from roles_disponibles";
-            ResultSet rs = conectar().executeQuery(s);
+            rs = stat.executeQuery(s);
             rs.next();
             int length = rs.getInt(1);
             System.out.println(length);
 
             s = "SELECT role from roles_disponibles";
-            rs = conectar().executeQuery(s);
+            rs = stat.executeQuery(s);
             int i = 0;
             String[] a = new String[length];
 
@@ -734,6 +1066,16 @@ public class DataBase {
         catch (SQLException e){
             e.printStackTrace();
             return null;
+        }
+        finally{
+            try {
+                stat.close();
+                rs.close();
+                conn.close();
+                System.out.println("Derby objects closed");
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
     }
