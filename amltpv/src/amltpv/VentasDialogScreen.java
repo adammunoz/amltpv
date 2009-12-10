@@ -128,6 +128,7 @@ public class VentasDialogScreen extends javax.swing.JDialog {
         desOcuparButton = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         totalLabel = new javax.swing.JLabel();
+        atrasButton = new javax.swing.JButton();
 
         jScrollPane2.setName("jScrollPane2"); // NOI18N
 
@@ -454,6 +455,15 @@ public class VentasDialogScreen extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        atrasButton.setFont(resourceMap.getFont("atrasButton.font")); // NOI18N
+        atrasButton.setText(resourceMap.getString("atrasButton.text")); // NOI18N
+        atrasButton.setName("atrasButton"); // NOI18N
+        atrasButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atrasButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -465,7 +475,10 @@ public class VentasDialogScreen extends javax.swing.JDialog {
                         .addComponent(infoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(atrasButton, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -490,12 +503,15 @@ public class VentasDialogScreen extends javax.swing.JDialog {
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(atrasButton, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         pack();
@@ -730,6 +746,11 @@ public class VentasDialogScreen extends javax.swing.JDialog {
         
     }//GEN-LAST:event_moverMesaActionPerformed
 
+    private void atrasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasButtonActionPerformed
+        AmltpvView.productosModel.upCurrentNode(infoLabel);
+        inputInfo(AmltpvView.productosModel.getCurrentNode().children());
+    }//GEN-LAST:event_atrasButtonActionPerformed
+
     private int[] getPositionWithValue(int tecla){
         int[] result = new int[2];
         int rows = modelInfo.getRowCount();
@@ -813,6 +834,7 @@ public class VentasDialogScreen extends javax.swing.JDialog {
  
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton atrasButton;
     private javax.swing.JButton borrarButton;
     private javax.swing.ButtonGroup buttonSalir;
     private javax.swing.JTextField cantField;
