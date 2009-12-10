@@ -376,8 +376,8 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tableInfoMouseClicked"/>
             <EventHandler event="mouseMoved" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="tableInfoMouseMoved"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tableInfoMouseClicked"/>
           </Events>
         </Component>
       </SubComponents>
@@ -409,13 +409,14 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
+              <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="borrarButton" alignment="0" pref="247" max="32767" attributes="0"/>
-                      <Component id="jButton5" alignment="0" pref="247" max="32767" attributes="0"/>
                       <Component id="imprimirButton" alignment="0" pref="247" max="32767" attributes="0"/>
-                      <Component id="jButton4" alignment="1" pref="247" max="32767" attributes="0"/>
+                      <Component id="ocuparButton" alignment="0" pref="247" max="32767" attributes="0"/>
+                      <Component id="desOcuparButton" alignment="1" pref="247" max="32767" attributes="0"/>
+                      <Component id="moverMesa" alignment="1" pref="247" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -425,11 +426,13 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <Component id="imprimirButton" min="-2" pref="58" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
-                  <Component id="jButton4" min="-2" pref="63" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jButton5" pref="65" max="32767" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="ocuparButton" pref="65" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="desOcuparButton" pref="65" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="moverMesa" min="-2" pref="63" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   <Component id="borrarButton" min="-2" pref="63" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
               </Group>
@@ -440,6 +443,7 @@
         <Component class="javax.swing.JButton" name="imprimirButton">
           <Properties>
             <Property name="font" type="java.awt.Font" resourceKey="imprimirButton.font"/>
+            <Property name="foreground" type="java.awt.Color" resourceKey="imprimirButton.foreground"/>
             <Property name="text" type="java.lang.String" resourceKey="imprimirButton.text"/>
             <Property name="name" type="java.lang.String" value="imprimirButton" noResource="true"/>
           </Properties>
@@ -447,19 +451,27 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="imprimirButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton4">
+        <Component class="javax.swing.JButton" name="moverMesa">
           <Properties>
-            <Property name="font" type="java.awt.Font" resourceKey="jButton4.font"/>
-            <Property name="text" type="java.lang.String" resourceKey="jButton4.text"/>
-            <Property name="name" type="java.lang.String" value="jButton4" noResource="true"/>
+            <Property name="font" type="java.awt.Font" resourceKey="moverMesa.font"/>
+            <Property name="foreground" type="java.awt.Color" resourceKey="moverMesa.foreground"/>
+            <Property name="text" type="java.lang.String" resourceKey="moverMesa.text"/>
+            <Property name="name" type="java.lang.String" value="moverMesa" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="moverMesaActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton5">
+        <Component class="javax.swing.JButton" name="ocuparButton">
           <Properties>
-            <Property name="font" type="java.awt.Font" resourceKey="jButton5.font"/>
-            <Property name="text" type="java.lang.String" resourceKey="jButton5.text"/>
-            <Property name="name" type="java.lang.String" value="jButton5" noResource="true"/>
+            <Property name="font" type="java.awt.Font" resourceKey="ocuparButton.font"/>
+            <Property name="foreground" type="java.awt.Color" resourceKey="ocuparButton.foreground"/>
+            <Property name="text" type="java.lang.String" resourceKey="ocuparButton.text"/>
+            <Property name="name" type="java.lang.String" value="ocuparButton" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ocuparButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="borrarButton">
           <Properties>
@@ -469,6 +481,17 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="borrarButtonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="desOcuparButton">
+          <Properties>
+            <Property name="font" type="java.awt.Font" resourceKey="desOcuparButton.font"/>
+            <Property name="foreground" type="java.awt.Color" resourceKey="desOcuparButton.foreground"/>
+            <Property name="text" type="java.lang.String" resourceKey="desOcuparButton.text"/>
+            <Property name="name" type="java.lang.String" value="desOcuparButton" noResource="true"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="desOcuparButtonActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

@@ -123,6 +123,12 @@ public class ConnectionThread implements Runnable{
             AmltpvView.changeMesasIcon(operand,new ImageIcon("imgs/mesaBusy.jpg"));
             sendMsg("done");
         }
+        else if (operation.equals("mesaLiberada")){
+            System.out.println("Mesa liberada operation identified");
+            ThreadServidor.servidor.propagate(operation,operand);
+            AmltpvView.changeMesasIcon(operand,new ImageIcon("imgs/mesa.jpg"));
+            sendMsg("done");
+        }
         else if (operation.equals("mesaOcupada")){
             System.out.println("Mesa ocupada operation identified");
             mesasOcupadas.add(operand);

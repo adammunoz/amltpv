@@ -122,9 +122,10 @@ public class VentasDialogScreen extends javax.swing.JDialog {
         infoLabel = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         imprimirButton = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        moverMesa = new javax.swing.JButton();
+        ocuparButton = new javax.swing.JButton();
         borrarButton = new javax.swing.JButton();
+        desOcuparButton = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         totalLabel = new javax.swing.JLabel();
 
@@ -324,14 +325,14 @@ public class VentasDialogScreen extends javax.swing.JDialog {
         tableInfo.setName("tableInfo"); // NOI18N
         tableInfo.setRowHeight(60);
         tableInfo.setRowMargin(10);
-        tableInfo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableInfoMouseClicked(evt);
-            }
-        });
         tableInfo.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 tableInfoMouseMoved(evt);
+            }
+        });
+        tableInfo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableInfoMouseClicked(evt);
             }
         });
         jScrollPane4.setViewportView(tableInfo);
@@ -351,6 +352,7 @@ public class VentasDialogScreen extends javax.swing.JDialog {
         jPanel3.setName("jPanel3"); // NOI18N
 
         imprimirButton.setFont(resourceMap.getFont("imprimirButton.font")); // NOI18N
+        imprimirButton.setForeground(resourceMap.getColor("imprimirButton.foreground")); // NOI18N
         imprimirButton.setText(resourceMap.getString("imprimirButton.text")); // NOI18N
         imprimirButton.setName("imprimirButton"); // NOI18N
         imprimirButton.addActionListener(new java.awt.event.ActionListener() {
@@ -359,13 +361,25 @@ public class VentasDialogScreen extends javax.swing.JDialog {
             }
         });
 
-        jButton4.setFont(resourceMap.getFont("jButton4.font")); // NOI18N
-        jButton4.setText(resourceMap.getString("jButton4.text")); // NOI18N
-        jButton4.setName("jButton4"); // NOI18N
+        moverMesa.setFont(resourceMap.getFont("moverMesa.font")); // NOI18N
+        moverMesa.setForeground(resourceMap.getColor("moverMesa.foreground")); // NOI18N
+        moverMesa.setText(resourceMap.getString("moverMesa.text")); // NOI18N
+        moverMesa.setName("moverMesa"); // NOI18N
+        moverMesa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                moverMesaActionPerformed(evt);
+            }
+        });
 
-        jButton5.setFont(resourceMap.getFont("jButton5.font")); // NOI18N
-        jButton5.setText(resourceMap.getString("jButton5.text")); // NOI18N
-        jButton5.setName("jButton5"); // NOI18N
+        ocuparButton.setFont(resourceMap.getFont("ocuparButton.font")); // NOI18N
+        ocuparButton.setForeground(resourceMap.getColor("ocuparButton.foreground")); // NOI18N
+        ocuparButton.setText(resourceMap.getString("ocuparButton.text")); // NOI18N
+        ocuparButton.setName("ocuparButton"); // NOI18N
+        ocuparButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ocuparButtonActionPerformed(evt);
+            }
+        });
 
         borrarButton.setFont(resourceMap.getFont("borrarButton.font")); // NOI18N
         borrarButton.setText(resourceMap.getString("borrarButton.text")); // NOI18N
@@ -376,28 +390,41 @@ public class VentasDialogScreen extends javax.swing.JDialog {
             }
         });
 
+        desOcuparButton.setFont(resourceMap.getFont("desOcuparButton.font")); // NOI18N
+        desOcuparButton.setForeground(resourceMap.getColor("desOcuparButton.foreground")); // NOI18N
+        desOcuparButton.setText(resourceMap.getString("desOcuparButton.text")); // NOI18N
+        desOcuparButton.setName("desOcuparButton"); // NOI18N
+        desOcuparButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                desOcuparButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(borrarButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
-                    .addComponent(imprimirButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(borrarButton, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
+                    .addComponent(imprimirButton, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
+                    .addComponent(ocuparButton, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
+                    .addComponent(desOcuparButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
+                    .addComponent(moverMesa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addComponent(imprimirButton, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(73, 73, 73)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ocuparButton, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(desOcuparButton, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(moverMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
                 .addComponent(borrarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
         );
@@ -689,6 +716,20 @@ public class VentasDialogScreen extends javax.swing.JDialog {
         this.salirButtonActionPerformed(null);
     }//GEN-LAST:event_imprimirButtonActionPerformed
 
+    private void ocuparButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ocuparButtonActionPerformed
+        AmltpvView.mesasArray[currentMesa].setIcon(new ImageIcon("imgs/mesaBusy.jpg"));
+        ThreadServidor.servidor.propagate("mesaCambiada", Integer.toString(currentMesa));
+    }//GEN-LAST:event_ocuparButtonActionPerformed
+
+    private void desOcuparButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desOcuparButtonActionPerformed
+        AmltpvView.changeMesasIcon(Integer.toString(currentMesa), new ImageIcon("imgs/mesa.jpg"));
+        ThreadServidor.servidor.propagate("liberate", Integer.toString(currentMesa));
+    }//GEN-LAST:event_desOcuparButtonActionPerformed
+
+    private void moverMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moverMesaActionPerformed
+        
+    }//GEN-LAST:event_moverMesaActionPerformed
+
     private int[] getPositionWithValue(int tecla){
         int[] result = new int[2];
         int rows = modelInfo.getRowCount();
@@ -777,11 +818,10 @@ public class VentasDialogScreen extends javax.swing.JDialog {
     private javax.swing.JTextField cantField;
     private javax.swing.JTextField codigoTextField;
     private javax.swing.JTable contentsTable;
+    private javax.swing.JButton desOcuparButton;
     private javax.swing.JButton imprimirButton;
     private javax.swing.JLabel infoLabel;
     private javax.swing.JButton introButton;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -792,6 +832,8 @@ public class VentasDialogScreen extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton moverMesa;
+    private javax.swing.JButton ocuparButton;
     private javax.swing.JButton salirButton;
     private javax.swing.JTable tableInfo;
     private javax.swing.JLabel totalLabel;
