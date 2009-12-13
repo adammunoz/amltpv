@@ -45,11 +45,9 @@ public class GastosDialog extends javax.swing.JDialog implements LoggedDialog{
     }
     void fillGastosTable(){
         model.setRowCount(0);
-        String diaApertura = AmltpvView.db.getStringValueFromCaja("dia_apertura");
-        String horaApertura = AmltpvView.db.getStringValueFromCaja("hora_apertura");
-        String diaCierre = "9999-12-31";
-        String horaCierre = "23:59:59";
-        Vector gastosVector = AmltpvView.db.queryGastos(diaApertura, horaApertura, diaCierre, horaCierre);
+        String dia_hora_apertura = AmltpvView.db.getStringValueFromCaja("dia_hora_apertura");
+
+        Vector gastosVector = AmltpvView.db.queryGastos(dia_hora_apertura,"9999-12-31 23:59:59");
         Iterator iter = gastosVector.iterator();
         while (iter.hasNext()){
             model.addRow((Object[]) iter.next());
@@ -99,14 +97,14 @@ public class GastosDialog extends javax.swing.JDialog implements LoggedDialog{
 
             },
             new String [] {
-                "Fecha", "Hora", "Concepto", "Precio", "Firma"
+                "Fecha", "Concepto", "Precio", "Firma"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, false, false, true
+                false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -120,10 +118,9 @@ public class GastosDialog extends javax.swing.JDialog implements LoggedDialog{
         gastosTable.setName("gastosTable"); // NOI18N
         jScrollPane1.setViewportView(gastosTable);
         gastosTable.getColumnModel().getColumn(0).setHeaderValue(resourceMap.getString("gastosTable.columnModel.title0")); // NOI18N
-        gastosTable.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("gastosTable.columnModel.title1")); // NOI18N
-        gastosTable.getColumnModel().getColumn(2).setHeaderValue(resourceMap.getString("gastosTable.columnModel.title2")); // NOI18N
-        gastosTable.getColumnModel().getColumn(3).setHeaderValue(resourceMap.getString("gastosTable.columnModel.title3")); // NOI18N
-        gastosTable.getColumnModel().getColumn(4).setHeaderValue(resourceMap.getString("gastosTable.columnModel.title4")); // NOI18N
+        gastosTable.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("gastosTable.columnModel.title2")); // NOI18N
+        gastosTable.getColumnModel().getColumn(2).setHeaderValue(resourceMap.getString("gastosTable.columnModel.title3")); // NOI18N
+        gastosTable.getColumnModel().getColumn(3).setHeaderValue(resourceMap.getString("gastosTable.columnModel.title4")); // NOI18N
 
         conceptoField.setText(resourceMap.getString("conceptoField.text")); // NOI18N
         conceptoField.setName("conceptoField"); // NOI18N

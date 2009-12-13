@@ -16,6 +16,7 @@ import java.awt.Cursor;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.sql.Timestamp;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -743,7 +744,11 @@ public class VentasDialogScreen extends javax.swing.JDialog {
     }//GEN-LAST:event_desOcuparButtonActionPerformed
 
     private void moverMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moverMesaActionPerformed
-        
+        MoverMesaDialog dialog = new MoverMesaDialog(AmltpvView.self.getFrame(),
+                true,Integer.toString(currentMesa));
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
+        salirButtonActionPerformed(new java.awt.event.ActionEvent(salirButton, 0, "dummy"));
     }//GEN-LAST:event_moverMesaActionPerformed
 
     private void atrasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasButtonActionPerformed

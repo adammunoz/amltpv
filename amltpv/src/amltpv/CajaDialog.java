@@ -29,7 +29,7 @@ public class CajaDialog extends javax.swing.JDialog implements LoggedDialog{
     public static final int RET_CANCEL = 0;
     /** A return status code - returned if OK button has been pressed */
     public static final int RET_OK = 1;
-    private String fechaApertura,horaApertura,fechaCierre,horaCierre,usuario;
+    private String dia_hora_apertura,dia_hora_cierre,usuario;
     private BigDecimal total,gastos,cambioAyer,debeHaber,tomorrowCambio,seLleva,resultado;
     /** Creates new form CajaDialog */
     public CajaDialog(java.awt.Frame parent, boolean modal) {
@@ -40,10 +40,8 @@ public class CajaDialog extends javax.swing.JDialog implements LoggedDialog{
         tablaCaja.getColumnModel().getColumn(1).setCellRenderer(new FormatRenderer());
         
         this.usuario = usuarioLabel.getText();
-        fechaApertura = AmltpvView.db.getStringValueFromCaja("dia_apertura");
-        horaApertura = AmltpvView.db.getStringValueFromCaja("hora_apertura");
-        fechaCierre = AmltpvView.util.getTodayString();
-        horaCierre = AmltpvView.util.getTimeString();
+        dia_hora_apertura = AmltpvView.db.getStringValueFromCaja("dia_hora_apertura");
+        dia_hora_cierre = AmltpvView.util.getCurrentTimeString();
         total = AmltpvView.db.totalCaja();
         gastos = AmltpvView.db.totalGastos();
         cambioAyer = AmltpvView.db.getYesterdayCambio();
@@ -55,22 +53,19 @@ public class CajaDialog extends javax.swing.JDialog implements LoggedDialog{
         String cambioAyerString = NumberFormat.getCurrencyInstance
                 (new Locale("es","ES")).format(cambioAyer);
         
-        model.addRow(new Object[] {"Fecha de apertura" , fechaApertura});
-        model.addRow(new Object[] {"Hora de apertura" , horaApertura});
-        model.addRow(new Object[] {"Fecha de cierre" , fechaCierre});
-        model.addRow(new Object[] {"Hora de cierre" , horaCierre});
+        model.addRow(new Object[] {"Fecha de apertura" , dia_hora_apertura});
+        model.addRow(new Object[] {"Fecha de cierre" , dia_hora_cierre});
         model.addRow(new Object[] {"Total de ventas" , totalString});
         model.addRow(new Object[] {"Total de gastos" , gastosString});
 
-        Vector gastosVector = AmltpvView.db.queryGastos(fechaApertura, horaApertura,
-                fechaCierre, horaCierre);
+        Vector gastosVector = AmltpvView.db.queryGastos(dia_hora_apertura,dia_hora_cierre);
         Iterator iter = gastosVector.iterator();
         Object [] temp;
         while (iter.hasNext()){
             temp = (Object[]) iter.next();
-            temp[3] = NumberFormat.getCurrencyInstance
-                (new Locale("es","ES")).format(temp[3]);
-            model.addRow(new Object[]{temp[2],temp[3]});
+            temp[2] = NumberFormat.getCurrencyInstance
+                (new Locale("es","ES")).format(temp[2]);
+            model.addRow(new Object[]{temp[1],temp[2]});
         }
         debeHaber = total.subtract(gastos);
         debeHaber = debeHaber.add(cambioAyer);
@@ -276,7 +271,7 @@ public class CajaDialog extends javax.swing.JDialog implements LoggedDialog{
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         AmltpvView.db.addCierre(usuario, BigDecimal.ZERO);
-        AmltpvView.db.insertCambio(tomorrowCambio, fechaCierre, horaCierre);
+        AmltpvView.db.insertCambio(tomorrowCambio, dia_hora_apertura);
         AmltpvView.db.updateConfItem("cajaCerrada", "true");
         AmltpvView.self.borrarMesas();
         ThreadServidor.servidor.killClients();
@@ -316,24 +311,22 @@ public class CajaDialog extends javax.swing.JDialog implements LoggedDialog{
 
     private void printButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printButtonActionPerformed
         Vector<FacturaItem> facturaItemVec = new Vector();
-        facturaItemVec.add(new FacturaItem("","Fecha de apertura " + fechaApertura,""));
-        facturaItemVec.add(new FacturaItem("","Hora de apertura " + horaApertura,""));
-        facturaItemVec.add(new FacturaItem("","Fecha de cierre " + fechaCierre,""));
-        facturaItemVec.add(new FacturaItem("","Hora de cierre " + horaCierre,""));
+        facturaItemVec.add(new FacturaItem("","Apertura " + dia_hora_apertura,""));
+        facturaItemVec.add(new FacturaItem("","Cierre " + dia_hora_cierre,""));
         facturaItemVec.add(new FacturaItem
-            ("","Total de ventas",NumberFormat.getCurrencyInstance(new Locale("es","ES")).
+            ("","Ventas",NumberFormat.getCurrencyInstance(new Locale("es","ES")).
                 format(total)));
         facturaItemVec.add(new FacturaItem
-            ("","Total de gastos",NumberFormat.getCurrencyInstance(new Locale("es","ES")).
+            ("","Gastos",NumberFormat.getCurrencyInstance(new Locale("es","ES")).
                 format(gastos)));
         facturaItemVec.add(new FacturaItem
-            ("","Cambio que había",NumberFormat.getCurrencyInstance(new Locale("es","ES")).
+            ("","Cambio ayer",NumberFormat.getCurrencyInstance(new Locale("es","ES")).
                 format(cambioAyer)));
         facturaItemVec.add(new FacturaItem
-            ("","Cambio que se deja",NumberFormat.getCurrencyInstance(new Locale("es","ES")).
+            ("","Cambio mañana",NumberFormat.getCurrencyInstance(new Locale("es","ES")).
                 format(tomorrowCambio)));
         facturaItemVec.add(new FacturaItem
-            ("","Dinero que se lleva",NumberFormat.getCurrencyInstance(new Locale("es","ES")).
+            ("","Dinero sobre",NumberFormat.getCurrencyInstance(new Locale("es","ES")).
                 format(seLleva)));
         String resultadoStr;
         if (resultado.floatValue() > 0){
@@ -343,7 +336,7 @@ public class CajaDialog extends javax.swing.JDialog implements LoggedDialog{
             resultadoStr = "Sobran "+resultado.abs().toString();
         }
         else{
-            resultadoStr = "La caja está correcta";
+            resultadoStr = "Caja correcta";
         }
         HashMap strings = new HashMap();
         strings.put("fecha", AmltpvView.util.getCurrentTimeString());

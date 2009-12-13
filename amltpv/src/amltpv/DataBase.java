@@ -115,25 +115,21 @@ public class DataBase {
             conectar().execute("create table cobradas("+
                     "id INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1)," +
                     "mesa varchar(2)," +
-                    "dia date," +
-                    "hora time," +
+                    "dia_hora timestamp," +
                     "producto varchar(30)," +
                     "precio decimal(6,2))");
 
             //Caja
             conectar().execute("create table caja("+
                     "id INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"+
-                    "dia_apertura date,"+
-                    "hora_apertura time,"+
-                    "dia_cierre date,"+
-                    "hora_cierre time,"+
+                    "dia_hora_apertura timestamp,"+
+                    "dia_hora_cierre timestamp,"+
                     "firma_usuario varchar(20),"+
                     "total decimal (10,2))");
 
             //Gastos
             conectar().execute("create table gastos("+
-                    "dia date," +
-                    "hora time," +
+                    "dia_hora timestamp," +
                     "concepto varchar(30)," +
                     "precio decimal(10,2)," +
                     "firma_usuario varchar(20))");
@@ -141,10 +137,8 @@ public class DataBase {
             //Cambio
             conectar().execute("create table cambio("+
                     "id INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"+
-                    "dia_apertura date,"+
-                    "hora_apertura time,"+
-                    "dia_cierre date,"+
-                    "hora_cierre time,"+
+                    "dia_hora_apertura timestamp,"+
+                    "dia_hora_cierre timestamp,"+
                     "total decimal (10,2))");
 
             insertConfItem("numMesas","0");
@@ -215,15 +209,14 @@ public class DataBase {
         return result;
     }
 
-    void insertCambio(BigDecimal cambio, String fechaCierre,String horaCierre ){
-        String fechaApertura = AmltpvView.util.getTodayString();
-        String horaApertura = AmltpvView.util.getTimeString();
+    void insertCambio(BigDecimal cambio, String dia_hora_apertura ){
+        String dia_hora_cierre = AmltpvView.util.getCurrentTimeString();
         Statement stat = conectar();
         try{
-            String s = "INSERT INTO cambio VALUES(DEFAULT,'"+
-                    fechaApertura+"','"+horaApertura+
-                    "','"+ fechaCierre + "','"+
-                    horaCierre +"'," + cambio + ")";
+            String s = "INSERT INTO cambio VALUES (DEFAULT,'"+
+                    dia_hora_apertura +
+                    "','"+ dia_hora_cierre + "',"+
+                    cambio + ")";
             System.out.println(s);
             stat.execute(s);
         }
@@ -242,11 +235,9 @@ public class DataBase {
     }
 
     BigDecimal totalCaja(){
-        String diaApertura = getStringValueFromCaja("dia_apertura");
-        String horaApertura = getStringValueFromCaja("hora_apertura");
+        String dia_hora_apertura = getStringValueFromCaja("dia_hora_apertura");
         String s = "select sum(precio) from cobradas where " +
-                "dia >= '" + diaApertura + "'" +
-                " and hora >= '" + horaApertura + "'";
+                "dia_hora >= '" + dia_hora_apertura + "'";
         System.out.println(s);
         BigDecimal result = new BigDecimal(0);
         Statement stat = conectar();
@@ -276,11 +267,9 @@ public class DataBase {
     }
 
     BigDecimal totalGastos(){
-        String diaApertura = getStringValueFromCaja("dia_apertura");
-        String horaApertura = getStringValueFromCaja("hora_apertura");
+        String dia_hora_apertura = getStringValueFromCaja("dia_hora_apertura");
         String s = "select sum(precio) from gastos where " +
-                "dia >= '" + diaApertura + "'" +
-                " and hora >= '" + horaApertura + "'";
+                "dia_hora>= '" + dia_hora_apertura + "'";
         System.out.println(s);
         BigDecimal result = new BigDecimal(0);
         Statement stat = conectar();
@@ -308,13 +297,13 @@ public class DataBase {
         }
         return result;
     }
+
     void addApertura(){
         System.out.println("Insetando apertura en base de datos");
-        String fecha = AmltpvView.util.getTodayString();
-        String hora = AmltpvView.util.getTimeString();
+        String dia_hora_apertura = AmltpvView.util.getCurrentTimeString();
         Statement stat = conectar();
         try{
-            String s = "INSERT INTO caja VALUES(DEFAULT,'"+fecha+"','"+hora+"',null,null,null,null)";
+            String s = "INSERT INTO caja VALUES(DEFAULT,'"+dia_hora_apertura+"',null,null,null)";
             System.out.println(s);
             stat.execute(s);
         }
@@ -335,21 +324,15 @@ public class DataBase {
 
     void addCierre(String usuario, BigDecimal total){
         System.out.println("Insertando cierre en base de datos");
-        String fecha = AmltpvView.util.getTodayString();
-        String hora = AmltpvView.util.getTimeString();
+        String dia_hora_cierre = AmltpvView.util.getCurrentTimeString();
         Statement stat = conectar();
         ResultSet rs = null;
         try{
             
             rs = stat.executeQuery("select MAX(id) from caja");
             rs.next();
-            int id = rs.getInt("1");
-            
-            
-            String s = "UPDATE caja SET dia_cierre='"+fecha+"' WHERE id="+id;
-            System.out.println(s);
-            stat.execute(s);
-            s = "UPDATE caja SET hora_cierre='"+hora+"' WHERE id="+id;
+            int id = rs.getInt("1");           
+            String s = "UPDATE caja SET dia_hora_cierre='"+dia_hora_cierre+"' WHERE id="+id;
             System.out.println(s);
             stat.execute(s);
             s = "UPDATE caja SET firma_usuario='"+usuario+"' WHERE id="+id;
@@ -397,7 +380,7 @@ public class DataBase {
                 Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        return result;
+        return result.substring(0, result.length() -2);
     }
     
     void addProductoToMesasPool(String mesa,String producto,boolean cocina){
@@ -429,12 +412,11 @@ public class DataBase {
 
     void addGasto(String gasto,BigDecimal precio,String user){
         System.out.println("add gasto called");
-        String dia = AmltpvView.util.getTodayString();
-        String hora = AmltpvView.util.getTimeString();
+        String dia_hora = AmltpvView.util.getCurrentTimeString();
         Statement stat = conectar();
         try{
-            String s = "INSERT INTO gastos VALUES('"+ dia +"','" +
-                    hora + "','" +gasto + "'," + precio + ",'"+user+"')";
+            String s = "INSERT INTO gastos VALUES('"+ dia_hora +"','"
+                    +gasto + "'," + precio + ",'"+user+"')";
             System.out.println(s);
             stat.execute(s);
         }
@@ -452,18 +434,15 @@ public class DataBase {
         }
     }
 
-    Vector queryGastos(String dia_apertura,String hora_apertura,
-            String dia_cierre,String hora_cierre){
+    Vector queryGastos(String dia_hora_apertura,String dia_hora_cierre){
         
         Vector resultVector = new Vector();
         Statement stat = conectar();
         ResultSet rs = null;
         try{
-            String s = "select dia,hora,concepto,precio,firma_usuario from gastos where " +
-                    "dia >= '" + dia_apertura + "'" +
-                    " and hora >= '" + hora_apertura + "'" +
-                    " and dia <= '" + dia_cierre + "'" +
-                    " and hora <= '" + hora_cierre + "'";
+            String s = "select dia_hora,concepto,precio,firma_usuario from gastos where " +
+                    "dia_hora >= '" + dia_hora_apertura + "'" +
+                    " and dia_hora <= '" + dia_hora_cierre + "'";
             System.out.println(s);
             rs = stat.executeQuery(s);
             Object[] temp = new Object[5];
@@ -472,7 +451,6 @@ public class DataBase {
                 temp[1] = rs.getObject(2);
                 temp[2] = rs.getObject(3);
                 temp[3] = rs.getObject(4);
-                temp[4] = rs.getObject(5);
                 resultVector.add(new Object[] {temp[0],temp[1],temp[2],temp[3],temp[4]});
                 System.out.println("Read from gastos " + temp[2]);
             }
@@ -527,8 +505,7 @@ public class DataBase {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        String dia = AmltpvView.util.getTodayString();
-        String hora = AmltpvView.util.getTimeString();
+        String dia_hora = AmltpvView.util.getCurrentTimeString();
         String producto = null;
         BigDecimal precio;                
         Statement stat_update = conectar();
@@ -539,8 +516,7 @@ public class DataBase {
                 System.out.println("Precio a insertar en base de datos " + precio.toString());
                 s = "INSERT INTO cobradas VALUES(DEFAULT,'"+
                                     mesa + "','" +
-                                    dia + "','"+
-                                    hora + "','"+
+                                    dia_hora + "','"+
                                     producto + "',"+
                                     precio + ")";
                 System.out.println(s);
@@ -1078,6 +1054,28 @@ public class DataBase {
             }
         }
 
+    }
+
+    void moverMesaInPool(String source, String target) {
+        Statement stat = conectar();
+        try{
+            String s = "UPDATE mesas_pool  SET mesa='"+target+"' WHERE mesa='"+source+"'";
+            System.out.println(s);
+            stat.execute(s);
+        }
+        catch (SQLException e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+        finally{
+            try {
+                stat.close();
+                conn.close();
+                System.out.println("Derby objects closed");
+                ThreadServidor.servidor.propagate("moverMesaCocina", source+":"+target);
+            } catch (SQLException ex) {
+                Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
 }

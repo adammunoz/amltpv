@@ -119,6 +119,10 @@ public class AmltpvView extends FrameView {
     void pintarMesas(){
         int numMesas = Byte.parseByte(db.queryValor("numMesas"));
         mesasArray = new JButton[numMesas+1];
+        numMesasArray = new String[numMesas];
+        for (int j=0;j<numMesas;j++){
+            numMesasArray[j] = Integer.toString(j+1);
+        }
         for (int i=1;i<=numMesas;i++){
            mesasArray[i] = new JButton(String.valueOf(i),new ImageIcon("imgs/mesa.jpg"));
            mesasArray[i].setFont(new Font("sansserif",Font.BOLD,18));
@@ -456,6 +460,7 @@ public class AmltpvView extends FrameView {
     public static Utils util;
     static ProductosModel productosModel;
     static JButton[] mesasArray;
+    static String[] numMesasArray;
     static int remoteProcessing;
     public static AmltpvView self;
 }
