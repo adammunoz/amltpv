@@ -292,8 +292,8 @@ public class VentasDialogScreen extends javax.swing.JDialog {
         contentsTable.setName("contentsTable"); // NOI18N
         contentsTable.setRowHeight(30);
         contentsTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                contentsTableMouseClicked(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                contentsTableMousePressed(evt);
             }
         });
         jScrollPane3.setViewportView(contentsTable);
@@ -333,8 +333,8 @@ public class VentasDialogScreen extends javax.swing.JDialog {
             }
         });
         tableInfo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableInfoMouseClicked(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tableInfoMousePressed(evt);
             }
         });
         jScrollPane4.setViewportView(tableInfo);
@@ -556,20 +556,6 @@ public class VentasDialogScreen extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_codigoTextFieldKeyPressed
 
-    private void tableInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableInfoMouseClicked
-        modeMouse = true;
-        Point p = evt.getPoint();
-        int row = tableInfo.rowAtPoint(p);
-        int column = tableInfo.columnAtPoint(p);
-        if (evt.getButton()==MouseEvent.BUTTON1){
-            inputInfo(AmltpvView.productosModel.browse((Integer) tableInfo.getValueAt(row, column-1),infoLabel));
-        }
-        if (evt.getButton()==MouseEvent.BUTTON3){
-            AmltpvView.productosModel.upCurrentNode(infoLabel);
-            inputInfo(AmltpvView.productosModel.getCurrentNode().children());
-        }
-    }//GEN-LAST:event_tableInfoMouseClicked
-
     private void tableInfoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableInfoMouseMoved
         Point p = evt.getPoint();
         int row = tableInfo.rowAtPoint(p);
@@ -680,19 +666,6 @@ public class VentasDialogScreen extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_borrarButtonActionPerformed
 
-    private void contentsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contentsTableMouseClicked
-        if (modoBorrando){
-            Point p = evt.getPoint();
-            int row = contentsTable.rowAtPoint(p);
-            int column = 1;
-            String producto = (String) modelContents.getValueAt(row, column);
-            AmltpvView.db.deleteFromMesasPool(Integer.toString(currentMesa),producto);
-            modelContents.setRowCount(0);
-            fillContentsTable();
-            calculateTotal();
-        }
-    }//GEN-LAST:event_contentsTableMouseClicked
-
     private void salirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirButtonActionPerformed
         ConnectionThread.mesasOcupadas.remove(new Integer(currentMesa).toString());
         ThreadServidor.servidor.propagate("mesaCerrada",new Integer(currentMesa).toString());
@@ -755,6 +728,33 @@ public class VentasDialogScreen extends javax.swing.JDialog {
         AmltpvView.productosModel.upCurrentNode(infoLabel);
         inputInfo(AmltpvView.productosModel.getCurrentNode().children());
     }//GEN-LAST:event_atrasButtonActionPerformed
+
+    private void tableInfoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableInfoMousePressed
+        modeMouse = true;
+        Point p = evt.getPoint();
+        int row = tableInfo.rowAtPoint(p);
+        int column = tableInfo.columnAtPoint(p);
+        if (evt.getButton()==MouseEvent.BUTTON1){
+            inputInfo(AmltpvView.productosModel.browse((Integer) tableInfo.getValueAt(row, column-1),infoLabel));
+        }
+        if (evt.getButton()==MouseEvent.BUTTON3){
+            AmltpvView.productosModel.upCurrentNode(infoLabel);
+            inputInfo(AmltpvView.productosModel.getCurrentNode().children());
+        }
+    }//GEN-LAST:event_tableInfoMousePressed
+
+    private void contentsTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contentsTableMousePressed
+        if (modoBorrando){
+            Point p = evt.getPoint();
+            int row = contentsTable.rowAtPoint(p);
+            int column = 1;
+            String producto = (String) modelContents.getValueAt(row, column);
+            AmltpvView.db.deleteFromMesasPool(Integer.toString(currentMesa),producto);
+            modelContents.setRowCount(0);
+            fillContentsTable();
+            calculateTotal();
+        }
+    }//GEN-LAST:event_contentsTableMousePressed
 
     private int[] getPositionWithValue(int tecla){
         int[] result = new int[2];
