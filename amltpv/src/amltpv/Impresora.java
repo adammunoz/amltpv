@@ -48,7 +48,7 @@ public class Impresora {
             job.setPrintable(fac);
             job.print(attributes);
         } catch (PrinterException ex) {
-            System.out.println("Error de impresión");
+            AmltpvView.util.log("Error de impresión");
         }
     }
  

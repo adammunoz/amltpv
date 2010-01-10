@@ -42,9 +42,9 @@ public class AmltpvApp extends SingleFrameApplication {
     public static void main(String[] args) {
 //        SplashScreen splash = SplashScreen.getSplashScreen();
 //        if(splash==null)
-//            System.out.println("It was null!!");
+//            AmltpvView.util.log("It was null!!");
 //        else
-//            System.out.println("It wasn't null!!!");
+//            AmltpvView.util.log("It wasn't null!!!");
         launch(AmltpvApp.class, args);
     }
 }

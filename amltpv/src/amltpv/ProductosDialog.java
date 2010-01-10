@@ -301,7 +301,7 @@ public class ProductosDialog extends javax.swing.JDialog {
         padreLabelProducto.setText(selectedNode.toString());
         }
         catch(java.lang.NullPointerException ex){
-            System.out.println(ex.toString());
+            AmltpvView.util.log(ex.toString());
         }
     }//GEN-LAST:event_productosTreeValueChanged
 

@@ -76,23 +76,23 @@ public class Factura implements Printable{
 
     void drawHeader(int page){
         if (page == 1){
-            System.out.println("Drawing header...");
+            AmltpvView.util.log("Drawing header...");
             g2d.drawString(nombreNegocio, headerX, 20);
             g2d.drawString(fecha, headerX, 35);
             g2d.drawString("Mesa " + mesa, headerX, 50);
             g2d.drawLine(headerX,65,subX+30,65);
         }
         else{
-            System.out.println("Not drawing header");
+            AmltpvView.util.log("Not drawing header");
         }
     }
 
     @Override
     public int print(Graphics g, PageFormat pf, int pageIndex)throws PrinterException{
         if (pages == 0){
-            System.out.println("Calculating pages");
+            AmltpvView.util.log("Calculating pages");
             calculatePages();
-            System.out.println("We need " + pages + " pages");
+            AmltpvView.util.log("We need " + pages + " pages");
         }
         if (pageIndex + 1 > pages) {
             return NO_SUCH_PAGE;
@@ -107,37 +107,37 @@ public class Factura implements Printable{
     }
 
     void drawContents(int page){
-        System.out.println("Drawing contents... page " + page);
+        AmltpvView.util.log("Drawing contents... page " + page);
         FacturaItem item;
         Iterator<FacturaItem> iter = contents.iterator();
 
         int lineFac;
         if (page == 1){
             lineFac = 65;
-            System.out.println("Line starting from " + lineFac);
+            AmltpvView.util.log("Line starting from " + lineFac);
         }
         else{
             lineFac = 5;
-            System.out.println("Line starting from " + lineFac);
+            AmltpvView.util.log("Line starting from " + lineFac);
         }
 
         productIndex = 1;
         while (iter.hasNext()){
-            //System.out.println("LineFac is " + lineFac);
-            System.out.println("Processing product index for printing " + productIndex);
+            //AmltpvView.util.log("LineFac is " + lineFac);
+            AmltpvView.util.log("Processing product index for printing " + productIndex);
             
-            System.out.println("LineFac is " + lineFac);
+            AmltpvView.util.log("LineFac is " + lineFac);
             item = iter.next();
             if (productIndex < page*numberOfProductsPerPage &&
                     productIndex >= (page-1)*numberOfProductsPerPage){
                 lineFac += lineHeight;
                 drawFacItem(item,lineFac);
-                System.out.println("Printed index " + productIndex +
+                AmltpvView.util.log("Printed index " + productIndex +
                         " with lineFac " + lineFac);
             }
             productIndex += 1;
         }
-        System.out.println("No more productos");
+        AmltpvView.util.log("No more productos");
         if (pages == page){ //It's the last page
             drawFooter(lineFac);
         }

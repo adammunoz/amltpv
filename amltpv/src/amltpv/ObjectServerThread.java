@@ -27,7 +27,7 @@ public class ObjectServerThread extends Thread {
          try {
             client.close();
          }catch(Exception e) {
-           System.out.println(e.getMessage());
+           AmltpvView.util.log(e.getMessage());
          }
          return;
      }
@@ -36,7 +36,7 @@ public class ObjectServerThread extends Thread {
 
     public void run() {
       try {
-            System.out.println("sending productos Object");
+            AmltpvView.util.log("sending productos Object");
             oos.writeObject(AmltpvView.productosModel);
             oos.flush();
             // close streams and connections

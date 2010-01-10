@@ -539,7 +539,7 @@ public class VentasDialogScreen extends javax.swing.JDialog {
         if(keyCode==KeyEvent.VK_BACK_SPACE){
             processKey = false;
             if (AmltpvView.productosModel.getCurrentNode().equals(AmltpvView.productosModel.getRootNode())){
-                System.out.println("nothing");
+                AmltpvView.util.log("nothing");
             }
             else{
                 AmltpvView.productosModel.upCurrentNode(infoLabel);
@@ -549,7 +549,7 @@ public class VentasDialogScreen extends javax.swing.JDialog {
 
         else if (keyCode==KeyEvent.VK_ENTER){
             processKey = false;
-            System.out.println("enter");
+            AmltpvView.util.log("enter");
         }
         else{
             processKey = true;
@@ -633,14 +633,14 @@ public class VentasDialogScreen extends javax.swing.JDialog {
                                         position[0], 2);
         }
         else{
-            System.out.println("Error en pool");
+            AmltpvView.util.log("Error en pool");
             AmltpvView.util.log("Error grave con mesa " + currentMesa);
         }
         calculateTotal();
     }
     private void introButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_introButtonActionPerformed
         if (AmltpvView.productosModel.getCurrentNode().isLeaf()){
-            System.out.println("intro producto");
+            AmltpvView.util.log("intro producto");
             int row = tableInfo.getSelectedRow();
             int column = tableInfo.getSelectedColumn();
             String producto = (String) modelInfo.getValueAt(row, column);
@@ -790,7 +790,7 @@ public class VentasDialogScreen extends javax.swing.JDialog {
         Boolean goRight = false;
         Boolean goLast = false;
         if (AmltpvView.productosModel.getCurrentNode().isLeaf()){
-            System.out.println("leaf");
+            AmltpvView.util.log("leaf");
             int[] position = new int[2];
             if (modeMouse){
                 introButtonActionPerformed(null);
@@ -805,14 +805,14 @@ public class VentasDialogScreen extends javax.swing.JDialog {
             while (children.hasMoreElements()){
                 if (!goRight){
                     String categoria = children.nextElement().toString();
-                    System.out.println("Printing left column " + categoria);
+                    AmltpvView.util.log("Printing left column " + categoria);
                     modelInfo.addRow(new Object[] {tecla,categoria});
                     goRight = true; //toggle
                     tecla++;
                 }
                 else {
                     String producto = children.nextElement().toString();
-                    System.out.println("Printing right column " + producto);
+                    AmltpvView.util.log("Printing right column " + producto);
                     goLast = false; // Porque cambie la tabla a tener 4 columnas solo
                                     // asi que en vez de cambiar el codigo este hack rapido
                                     // para que no imprimiera las ultimas 2 columnas

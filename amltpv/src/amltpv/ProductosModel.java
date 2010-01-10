@@ -44,7 +44,7 @@ public class ProductosModel extends DefaultTreeModel implements Serializable{
 
     public ProductosModel(){
         super(new DefaultMutableTreeNode("NO ACTIVADO"));
-        System.out.println("productos model created");
+        AmltpvView.util.log("productos model created");
     }
     public ProductosModel(DefaultMutableTreeNode node){
         super(node);
@@ -81,23 +81,23 @@ public class ProductosModel extends DefaultTreeModel implements Serializable{
     
     
     public float getPrice(String producto){
-        System.out.println("Getting price of " + producto);
+        AmltpvView.util.log("Getting price of " + producto);
         return (Float)productosHash.get(producto);
     }
     
     public String getPriceFormatted(String producto){
         NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("es","ES"));
-        System.out.println(productosHash.toString());
+        AmltpvView.util.log(productosHash.toString());
         return nf.format(productosHash.get(producto));
     }
     
     public void populateProductosEnumeration(DefaultMutableTreeNode node){
         if (node.isLeaf() && !node.toString().equals("vacío")){
             productos.add(node.toString());
-            System.out.println("Added to productos:"+node);
+            AmltpvView.util.log("Added to productos:"+node);
         }
         else{
-            System.out.println("Node:"+node+" is not leaf so not added to productos");
+            AmltpvView.util.log("Node:"+node+" is not leaf so not added to productos");
             Enumeration children = node.children();
             while (children.hasMoreElements()){
                 populateProductosEnumeration((DefaultMutableTreeNode) children.nextElement());
@@ -107,7 +107,7 @@ public class ProductosModel extends DefaultTreeModel implements Serializable{
     public void populateCategoriasEnumeration(DefaultMutableTreeNode node){
         if (!node.isLeaf()){ //if node is parent
             categorias.add(node.toString());
-            System.out.println("Added to categorias:"+node);
+            AmltpvView.util.log("Added to categorias:"+node);
             Enumeration children = node.children();
             while (children.hasMoreElements()){
                 populateCategoriasEnumeration((DefaultMutableTreeNode) children.nextElement());
@@ -115,7 +115,7 @@ public class ProductosModel extends DefaultTreeModel implements Serializable{
 
         }
         else{
-                System.out.println("Node:"+node+" is leaf so not added to categories");
+                AmltpvView.util.log("Node:"+node+" is leaf so not added to categories");
         }
     }
     private void listToArray(){
@@ -133,11 +133,11 @@ public class ProductosModel extends DefaultTreeModel implements Serializable{
     }
 
     public void performFindNode(TreeNode node, String text) {
-        System.out.println("Node:"+node.toString()+" comparing with "+text);
+        AmltpvView.util.log("Node:"+node.toString()+" comparing with "+text);
         if (node.toString().equals(text)){
 
             foundNode = (DefaultMutableTreeNode) node;
-            System.out.println("Found node:"+node);
+            AmltpvView.util.log("Found node:"+node);
         }
         else{
             Enumeration children = node.children();
@@ -156,12 +156,12 @@ public class ProductosModel extends DefaultTreeModel implements Serializable{
     public Boolean isCategoria(String s){
         categorias.clear();
         populateCategoriasEnumeration(rootNode);
-        System.out.println(categorias.toString());
+        AmltpvView.util.log(categorias.toString());
         if (categorias.contains(s)){
             return true;
         }
         else{
-            System.out.println("Categorias does not contain " + s);
+            AmltpvView.util.log("Categorias does not contain " + s);
             return false;
         }
     }
@@ -169,12 +169,12 @@ public class ProductosModel extends DefaultTreeModel implements Serializable{
     public Boolean isProducto(String s){
         productos.clear();
         populateProductosEnumeration(rootNode);
-        System.out.println(productos.toString());
+        AmltpvView.util.log(productos.toString());
         if (productos.contains(s)){
             return true;
         }
         else{
-            System.out.println("Productos does not contain " + s);
+            AmltpvView.util.log("Productos does not contain " + s);
             return false;
         }
     }
@@ -216,7 +216,7 @@ public class ProductosModel extends DefaultTreeModel implements Serializable{
 
     public Enumeration browse(int key){
         currentNode = (DefaultMutableTreeNode) currentNode.getChildAt(key);
-        System.out.println("current node is" + currentNode.toString());
+        AmltpvView.util.log("current node is" + currentNode.toString());
         Enumeration children = currentNode.children();
         return children;
 
@@ -230,7 +230,7 @@ public class ProductosModel extends DefaultTreeModel implements Serializable{
 
     public void upCurrentNode(JLabel label){
         if (currentNode.equals(rootNode)){
-            System.out.println("nothing");
+            AmltpvView.util.log("nothing");
         }
         else{
             currentNode = (DefaultMutableTreeNode) currentNode.getParent();
@@ -239,7 +239,7 @@ public class ProductosModel extends DefaultTreeModel implements Serializable{
     }
     public void resetCurrentNode(){
         currentNode = rootNode;
-        System.out.println("current node is" + currentNode.toString());
+        AmltpvView.util.log("current node is" + currentNode.toString());
     }
     public DefaultMutableTreeNode getCurrentNode(){
         return currentNode;

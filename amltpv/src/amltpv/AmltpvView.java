@@ -230,6 +230,11 @@ public class AmltpvView extends FrameView {
         exitMenuItem.setForeground(resourceMap.getColor("exitMenuItem.foreground")); // NOI18N
         exitMenuItem.setText(resourceMap.getString("exitMenuItem.text")); // NOI18N
         exitMenuItem.setName("exitMenuItem"); // NOI18N
+        exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitMenuItemActionPerformed(evt);
+            }
+        });
         fileMenu.add(exitMenuItem);
 
         menuBar.add(fileMenu);
@@ -391,7 +396,7 @@ public class AmltpvView extends FrameView {
                 objServer = new ObjectServer();
                 objServerMobile = new ObjectServerMobile();
             } catch (Exception ex) {
-                System.out.println(ex.toString());
+                AmltpvView.util.log(ex.toString());
             }
             if (cajaCerrada.equals("true") || cajaCerrada.equals("nulo")){
                 AmltpvView.db.addApertura();
@@ -429,6 +434,10 @@ public class AmltpvView extends FrameView {
     private void cobradasMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cobradasMenuItemActionPerformed
         cobradasDialog.setVisible(true);
     }//GEN-LAST:event_cobradasMenuItemActionPerformed
+
+    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
+        AmltpvView.db.shutdown();
+    }//GEN-LAST:event_exitMenuItemActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem abrirNegocio;

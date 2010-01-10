@@ -169,7 +169,7 @@ public class PasswordDialog extends javax.swing.JDialog {
         String usuario = (String)usuarioComboBox.getSelectedItem();
         String codigo = Utils.charToString(jPasswordField1.getPassword());
         if (codigo.equals(AmltpvView.db.queryCodigo(usuario))){
-            System.out.println("autorización ok");
+            AmltpvView.util.log("autorización ok");
             doClose(usuario);
         }
         else{

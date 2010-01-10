@@ -30,7 +30,7 @@ public class StatusMsgThread implements Runnable{
                 Thread.sleep(ms);
                 reset();
             } catch (InterruptedException ex) {
-                System.out.println("New msg arrived, interrupted thread");
+                AmltpvView.util.log("New msg arrived, interrupted thread");
             }
     }
     void reset(){

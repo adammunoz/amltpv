@@ -20,18 +20,18 @@ private Socket client = null;
 
     public ObjectServerThreadMobile(Socket clientSocket){
         client = clientSocket;
-        System.out.println("Conexión aceptada de mobile");
+        AmltpvView.util.log("Conexión aceptada de mobile");
      try {
       ois = new ObjectInputStream(client.getInputStream());
-      System.out.println("Input stream abierto");
+      AmltpvView.util.log("Input stream abierto");
       oos = new ObjectOutputStream(client.getOutputStream());
-      System.out.println("Output stream abierto");
+      AmltpvView.util.log("Output stream abierto");
      } catch(Exception e1) {
          try {
             client.close();
-            System.out.println(e1.toString());
+            AmltpvView.util.log(e1.toString());
          }catch(Exception e) {
-           System.out.println(e.getMessage());
+           AmltpvView.util.log(e.getMessage());
          }
          return;
      }
@@ -40,7 +40,7 @@ private Socket client = null;
 
     public void run() {
       try {
-            System.out.println("sending productos Object to mobile");
+            AmltpvView.util.log("sending productos Object to mobile");
             oos.reset();
             oos.writeObject(AmltpvView.productosModel.getRootNode());
             oos.flush();
@@ -50,7 +50,7 @@ private Socket client = null;
             client.close();
 
       } catch(Exception e) {
-            System.out.println(e.toString());
+            AmltpvView.util.log(e.toString());
       }
    }
 }

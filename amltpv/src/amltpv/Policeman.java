@@ -24,26 +24,26 @@ public class Policeman {
             try{
                 loggedDialog = (LoggedDialog) dialog;
                 loggedDialog.setLoggedUser(usuario);
-                System.out.println("Logged user set");
+                AmltpvView.util.log("Logged user set");
             }
             catch (Exception ex){
-                System.out.println("Dialog doesn not support logged user");
+                AmltpvView.util.log("Dialog doesn not support logged user");
             }
             this.dialog.setVisible(true);
         }
         else{
-            System.out.println("not_authorised");
+            AmltpvView.util.log("not_authorised");
             AmltpvView.util.setStatus("Usuario no autorizado");
         }
     }
 
     boolean requestAcess(String role){
-        System.out.println("Se ha pedido acceso de " + role);
+        AmltpvView.util.log("Se ha pedido acceso de " + role);
         PasswordDialog passwordDialog = new PasswordDialog(null,true);
         passwordDialog.setLocationRelativeTo(null);
         passwordDialog.setVisible(true);
         usuario = passwordDialog.getReturnStatus();
-        System.out.println("Pide acceso:" + usuario);
+        AmltpvView.util.log("Pide acceso:" + usuario);
         if (! usuario.equals("not_authorised")){
             if (checkUserHasRole(usuario,role)){
                 return true;

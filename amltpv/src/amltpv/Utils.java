@@ -53,7 +53,7 @@ public class Utils {
         setStatus(oldText +" - " +s);
     }
     public boolean existeArchivo(String archivo) {
-        System.out.println(archivo);
+        AmltpvView.util.log("Existe? "+archivo);
         File f = new File(archivo);
         return f.exists()? true : false;
     }
@@ -68,14 +68,44 @@ public class Utils {
             bw.close();   
         }     
         catch (java.io.IOException e){
-            System.out.print("No se puede escribir al log");    
+            System.out.println("No se puede escribir al log");
+        }
+     }
+
+    public void log(int s){
+        System.out.println(s);
+        try{
+            File f = new File("log.txt");
+            BufferedWriter bw = new BufferedWriter (new FileWriter (f, true));
+            bw.write (getCurrentTimeString() + ":" + s);
+            bw.newLine();
+            bw.flush();
+            bw.close();
+        }
+        catch (java.io.IOException e){
+            System.out.println("No se puede escribir al log");
+        }
+     }
+
+    public void log(boolean s){
+        System.out.println(s);
+        try{
+            File f = new File("log.txt");
+            BufferedWriter bw = new BufferedWriter (new FileWriter (f, true));
+            bw.write (getCurrentTimeString() + ":" + s);
+            bw.newLine();
+            bw.flush();
+            bw.close();
+        }
+        catch (java.io.IOException e){
+            System.out.println("No se puede escribir al log");
         }
      }
 
     public void persistSetting(String setting,String value){
         if (existeArchivo("settings/"+setting+".txt")){
-            System.out.println("Existe el archivo y lo vamos a borrar");
-            System.out.println(
+            AmltpvView.util.log("Existe el archivo y lo vamos a borrar");
+            AmltpvView.util.log(
                     FileUtils.deleteQuietly(new File("settings/"+setting+".txt")));
             
         }
