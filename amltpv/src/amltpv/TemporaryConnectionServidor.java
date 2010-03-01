@@ -18,7 +18,7 @@ public class TemporaryConnectionServidor {
     private ConnectionThread connection;
 
     TemporaryConnectionServidor(){
-        AmltpvView.util.log("Servidor temporal en puerto 7");
+        System.out.println("Servidor temporal en puerto 7");
         try {
             serverSocket = new ServerSocket(7);
         } catch (IOException e) {
@@ -30,7 +30,7 @@ public class TemporaryConnectionServidor {
         while (true){
         try {
              connection = new ConnectionThread(serverSocket.accept());
-             AmltpvView.util.log("Conexión temporal remota aceptada");
+             System.out.println("Conexión temporal remota aceptada");
              Thread t = new Thread(connection);
              t.start();
         }

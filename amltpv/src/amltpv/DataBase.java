@@ -40,7 +40,7 @@ public class DataBase {
         try {
             Class.forName(driver).newInstance();
             utils.setStatus("Base de datos cargada");
-            AmltpvView.util.log("Loaded the Database driver");
+            System.out.println("Loaded the Database driver");
         } catch (ClassNotFoundException cnfe) {
             System.err.println("\nUnable to load the JDBC driver " + driver);
             System.err.println("Please check your CLASSPATH.");
@@ -55,17 +55,17 @@ public class DataBase {
             iae.printStackTrace(System.err);
         }
         if (utils.existeArchivo("baseDeDatos/")){
-            AmltpvView.util.log("Se ha encontrado la base de datos");
+            System.out.println("Se ha encontrado la base de datos");
             exists = true;
         }
         else{
-            AmltpvView.util.log("No se ha encontrado la base de datos");
+            System.out.println("No se ha encontrado la base de datos");
             crearBaseDatos();
         }
     }
 
     public DataBase(boolean son){ //It's called from AmltpvClient
-        AmltpvView.util.log("Database instance is a son");
+        System.out.println("Database instance is a son");
     }
 
     Boolean checkIfExists(){
@@ -181,7 +181,7 @@ public class DataBase {
     BigDecimal getYesterdayCambio(){
         String s = "select total" + 
                 " from cambio where id=(select max(id) from cambio)";
-        AmltpvView.util.log(s);
+        System.out.println(s);
         BigDecimal result = new BigDecimal(0);
         Statement stat = conectar();
         ResultSet rs = null;
@@ -199,7 +199,7 @@ public class DataBase {
                 stat.close();
                 rs.close();
                 conn.close();
-                AmltpvView.util.log("Derby objects closed");
+                System.out.println("Derby objects closed");
             } catch (SQLException ex) {
                 Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -218,7 +218,7 @@ public class DataBase {
                     dia_hora_apertura +
                     "','"+ dia_hora_cierre + "',"+
                     cambio + ")";
-            AmltpvView.util.log(s);
+            System.out.println(s);
             stat.execute(s);
         }
         catch (SQLException e){
@@ -228,7 +228,7 @@ public class DataBase {
             try {
                 stat.close();
                 conn.close();
-                AmltpvView.util.log("Derby objects closed");
+                System.out.println("Derby objects closed");
             } catch (SQLException ex) {
                 Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -239,7 +239,7 @@ public class DataBase {
         String dia_hora_apertura = getStringValueFromCaja("dia_hora_apertura");
         String s = "select sum(precio) from cobradas where " +
                 "dia_hora >= '" + dia_hora_apertura + "'";
-        AmltpvView.util.log(s);
+        System.out.println(s);
         BigDecimal result = new BigDecimal(0);
         Statement stat = conectar();
         ResultSet rs = null;
@@ -256,7 +256,7 @@ public class DataBase {
                 stat.close();
                 rs.close();
                 conn.close();
-                AmltpvView.util.log("Derby objects closed");
+                System.out.println("Derby objects closed");
             } catch (SQLException ex) {
                 Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -271,7 +271,7 @@ public class DataBase {
         String dia_hora_apertura = getStringValueFromCaja("dia_hora_apertura");
         String s = "select sum(precio) from gastos where " +
                 "dia_hora>= '" + dia_hora_apertura + "'";
-        AmltpvView.util.log(s);
+        System.out.println(s);
         BigDecimal result = new BigDecimal(0);
         Statement stat = conectar();
         ResultSet rs = null;
@@ -288,7 +288,7 @@ public class DataBase {
                 stat.close();
                 rs.close();
                 conn.close();
-                AmltpvView.util.log("Derby objects closed");
+                System.out.println("Derby objects closed");
             } catch (SQLException ex) {
                 Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -300,12 +300,12 @@ public class DataBase {
     }
 
     void addApertura(){
-        AmltpvView.util.log("Insetando apertura en base de datos");
+        System.out.println("Insetando apertura en base de datos");
         String dia_hora_apertura = AmltpvView.util.getCurrentTimeString();
         Statement stat = conectar();
         try{
             String s = "INSERT INTO caja VALUES(DEFAULT,'"+dia_hora_apertura+"',null,null,null)";
-            AmltpvView.util.log(s);
+            System.out.println(s);
             stat.execute(s);
         }
         catch (SQLException e){
@@ -315,7 +315,7 @@ public class DataBase {
             try {
                 stat.close();
                 conn.close();
-                AmltpvView.util.log("Derby objects closed");
+                System.out.println("Derby objects closed");
             } catch (SQLException ex) {
                 Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -324,7 +324,7 @@ public class DataBase {
 
 
     void addCierre(String usuario, BigDecimal total){
-        AmltpvView.util.log("Insertando cierre en base de datos");
+        System.out.println("Insertando cierre en base de datos");
         String dia_hora_cierre = AmltpvView.util.getCurrentTimeString();
         Statement stat = conectar();
         ResultSet rs = null;
@@ -334,13 +334,13 @@ public class DataBase {
             rs.next();
             int id = rs.getInt("1");           
             String s = "UPDATE caja SET dia_hora_cierre='"+dia_hora_cierre+"' WHERE id="+id;
-            AmltpvView.util.log(s);
+            System.out.println(s);
             stat.execute(s);
             s = "UPDATE caja SET firma_usuario='"+usuario+"' WHERE id="+id;
-            AmltpvView.util.log(s);
+            System.out.println(s);
             stat.execute(s);
             s = "UPDATE caja SET total="+total+" WHERE id="+id;
-            AmltpvView.util.log(s);
+            System.out.println(s);
             stat.execute(s);
         }
         catch (SQLException e){
@@ -351,7 +351,7 @@ public class DataBase {
                 stat.close();
                 rs.close();
                 conn.close();
-                AmltpvView.util.log("Derby objects closed");
+                System.out.println("Derby objects closed");
             } catch (SQLException ex) {
                 Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -360,7 +360,7 @@ public class DataBase {
     
     String getStringValueFromCaja(String campo){
         String s = "select " + campo + " from user1.caja where id=(select max(id) from user1.caja)";
-        AmltpvView.util.log(s);
+        System.out.println(s);
         String result = null;
         Statement stat = conectar();
         ResultSet rs = null;
@@ -376,7 +376,7 @@ public class DataBase {
                 stat.close();
                 rs.close();
                 conn.close();
-                AmltpvView.util.log("Derby objects closed");
+                System.out.println("Derby objects closed");
             } catch (SQLException ex) {
                 Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -385,11 +385,11 @@ public class DataBase {
     }
     
     void addProductoToMesasPool(String mesa,String producto,boolean cocina){
-        AmltpvView.util.log("adding producto called");
+        System.out.println("adding producto called");
         Statement stat = conectar();
         try{
             String s = "INSERT INTO mesas_pool VALUES('"+ mesa + "','" +producto + "')";
-            AmltpvView.util.log(s);
+            System.out.println(s);
             stat.execute(s);
             if (cocina){ //Si es una comanda que se envia a cocina y no algo relacionado con borrar
                 ThreadServidor.servidor.comandaCocina("comanda@"+mesa+"@"+producto);
@@ -404,7 +404,7 @@ public class DataBase {
             try {
                 stat.close();
                 conn.close();
-                AmltpvView.util.log("Derby objects closed");
+                System.out.println("Derby objects closed");
             } catch (SQLException ex) {
                 Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -412,13 +412,13 @@ public class DataBase {
     }
 
     void addGasto(String gasto,BigDecimal precio,String user){
-        AmltpvView.util.log("add gasto called");
+        System.out.println("add gasto called");
         String dia_hora = AmltpvView.util.getCurrentTimeString();
         Statement stat = conectar();
         try{
             String s = "INSERT INTO gastos VALUES('"+ dia_hora +"','"
                     +gasto + "'," + precio + ",'"+user+"')";
-            AmltpvView.util.log(s);
+            System.out.println(s);
             stat.execute(s);
         }
         catch (SQLException e){
@@ -428,7 +428,7 @@ public class DataBase {
             try {
                 stat.close();
                 conn.close();
-                AmltpvView.util.log("Derby objects closed");
+                System.out.println("Derby objects closed");
             } catch (SQLException ex) {
                 Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -444,7 +444,7 @@ public class DataBase {
             String s = "select dia_hora,concepto,precio,firma_usuario from gastos where " +
                     "dia_hora >= '" + dia_hora_apertura + "'" +
                     " and dia_hora <= '" + dia_hora_cierre + "'";
-            AmltpvView.util.log(s);
+            System.out.println(s);
             rs = stat.executeQuery(s);
             Object[] temp = new Object[5];
             while (rs.next()){
@@ -453,7 +453,7 @@ public class DataBase {
                 temp[2] = rs.getObject(3);
                 temp[3] = rs.getObject(4);
                 resultVector.add(new Object[] {temp[0],temp[1],temp[2],temp[3],temp[4]});
-                AmltpvView.util.log("Read from gastos " + temp[2]);
+                System.out.println("Read from gastos " + temp[2]);
             }
         }
         catch (SQLException e){
@@ -464,7 +464,7 @@ public class DataBase {
                 stat.close();
                 rs.close();
                 conn.close();
-                AmltpvView.util.log("Derby objects closed");
+                System.out.println("Derby objects closed");
             } catch (SQLException ex) {
                 Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -474,11 +474,11 @@ public class DataBase {
     }
 
     void emptyPool(String mesa){
-        AmltpvView.util.log("emptying pool:"+mesa);
+        System.out.println("emptying pool:"+mesa);
         Statement stat = conectar();
         try{
             String s = "DELETE FROM mesas_pool WHERE mesa='"+mesa+"'";
-            AmltpvView.util.log(s);
+            System.out.println(s);
             stat.execute(s);
         }
         catch (SQLException e){
@@ -488,7 +488,7 @@ public class DataBase {
             try {
                 stat.close();
                 conn.close();
-                AmltpvView.util.log("Derby objects closed");
+                System.out.println("Derby objects closed");
             } catch (SQLException ex) {
                 Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -496,9 +496,9 @@ public class DataBase {
     }
 
     void fromPoolToCobradas(String mesa){
-        AmltpvView.util.log("from pool to cobradas called");
+        System.out.println("from pool to cobradas called");
         String s = "select * from mesas_pool where mesa='"+mesa+"'";
-        AmltpvView.util.log(s);
+        System.out.println(s);
         Statement stat = conectar();
         ResultSet rs = null;
         try {
@@ -514,15 +514,15 @@ public class DataBase {
             while (rs.next()){
                 producto = rs.getString("producto");
                 precio = new BigDecimal(new Float(AmltpvView.productosModel.getPrice(producto)).toString());
-                AmltpvView.util.log("Precio a insertar en base de datos " + precio.toString());
+                System.out.println("Precio a insertar en base de datos " + precio.toString());
                 s = "INSERT INTO cobradas VALUES(DEFAULT,'"+
                                     mesa + "','" +
                                     dia_hora + "','"+
                                     producto + "',"+
                                     precio + ")";
-                AmltpvView.util.log(s);
+                System.out.println(s);
                 stat_update.executeUpdate(s);
-                AmltpvView.util.log("Finish from pool_to_mesas");
+                System.out.println("Finish from pool_to_mesas");
             }
         }
         catch (Exception ex){
@@ -534,7 +534,7 @@ public class DataBase {
                 stat_update.close();
                 rs.close();
                 conn.close();
-                AmltpvView.util.log("Derby objects closed");
+                System.out.println("Derby objects closed");
             } catch (SQLException ex) {
                 Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -544,7 +544,7 @@ public class DataBase {
         Statement stat = conectar();
         try{
             String s = "INSERT INTO hosts VALUES('"+ hostname + "')";
-            AmltpvView.util.log(s);
+            System.out.println(s);
             stat.execute(s);
         }
         catch (SQLException e){
@@ -554,7 +554,7 @@ public class DataBase {
             try {
                 stat.close();
                 conn.close();
-                AmltpvView.util.log("Derby objects closed");
+                System.out.println("Derby objects closed");
             } catch (SQLException ex) {
                 Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -562,7 +562,7 @@ public class DataBase {
     }
 
     String decodeRemoteQuery(String msg) {
-        AmltpvView.util.log("Decoding remote query:" + msg);
+        System.out.println("Decoding remote query:" + msg);
         
         if (msg.equals("numMesas")){
             return queryValor("numMesas");
@@ -591,7 +591,7 @@ public class DataBase {
         try{
             String s = "DELETE FROM mesas_pool WHERE producto ='"+ producto + "'" +
                     "AND MESA='"+mesa+"'";
-            AmltpvView.util.log(s);
+            System.out.println(s);
             stat.execute(s);
             ThreadServidor.servidor.comandaCocina("borrar@"+mesa+"@"+producto);
         }
@@ -602,7 +602,7 @@ public class DataBase {
             try {
                 stat.close();
                 conn.close();
-                AmltpvView.util.log("Derby objects closed");
+                System.out.println("Derby objects closed");
             } catch (SQLException ex) {
                 Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -616,7 +616,7 @@ public class DataBase {
         Statement stat = conectar();
         try{
             String s = "DELETE FROM hosts WHERE hostname ='"+ hostname + "'";
-            AmltpvView.util.log(s);
+            System.out.println(s);
             stat.execute(s);
         }
         catch (SQLException e){
@@ -626,7 +626,7 @@ public class DataBase {
             try {
                 stat.close();
                 conn.close();
-                AmltpvView.util.log("Derby objects closed");
+                System.out.println("Derby objects closed");
             } catch (SQLException ex) {
                 Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -635,19 +635,19 @@ public class DataBase {
     String insertFromRemoteHost(String query){
         Statement stat = conectar();
         try{
-            AmltpvView.util.log("Remote update query:" + query);
+            System.out.println("Remote update query:" + query);
             stat.execute(query);
             return "updated";
         }
         catch (SQLException e){
-            AmltpvView.util.log(e+"-query:"+query);
+            System.out.println(e+"-query:"+query);
             return "not updated";
         }
         finally{
             try {
                 stat.close();
                 conn.close();
-                AmltpvView.util.log("Derby objects closed");
+                System.out.println("Derby objects closed");
             } catch (SQLException ex) {
                 Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -657,19 +657,19 @@ public class DataBase {
     String deleteFromRemoteHost(String query) {
         Statement stat = conectar();
         try{
-            AmltpvView.util.log("Remote update query:" + query);
+            System.out.println("Remote update query:" + query);
             stat.execute(query);
             return "updated";
         }
         catch (SQLException e){
-            AmltpvView.util.log(e+"-query:"+query);
+            System.out.println(e+"-query:"+query);
             return "not updated";
         }
         finally{
             try {
                 stat.close();
                 conn.close();
-                AmltpvView.util.log("Derby objects closed");
+                System.out.println("Derby objects closed");
             } catch (SQLException ex) {
                 Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -683,7 +683,7 @@ public class DataBase {
         Vector resultVector = new Vector();
         try{
             s = "SELECT hostname from hosts";
-            AmltpvView.util.log(s);
+            System.out.println(s);
             rs = stat.executeQuery(s);
             while (rs.next()){
                 resultVector.add(rs.getString("hostname"));
@@ -697,7 +697,7 @@ public class DataBase {
                 stat.close();
                 rs.close();
                 conn.close();
-                AmltpvView.util.log("Derby objects closed");
+                System.out.println("Derby objects closed");
             } catch (SQLException ex) {
                 Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -711,7 +711,7 @@ public class DataBase {
         Vector resultVector = new Vector();
         try{
             s = "SELECT producto from mesas_pool WHERE mesa='" + mesa + "'";
-            AmltpvView.util.log(s);
+            System.out.println(s);
             rs = stat.executeQuery(s);
             while (rs.next()){
                 resultVector.add(rs.getString("producto"));
@@ -725,7 +725,7 @@ public class DataBase {
                 stat.close();
                 rs.close();
                 conn.close();
-                AmltpvView.util.log("Derby objects closed");
+                System.out.println("Derby objects closed");
             } catch (SQLException ex) {
                 Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -738,7 +738,7 @@ public class DataBase {
         Statement stat = conectar();
         try{
             s = "SELECT count(producto) from mesas_pool WHERE producto='" + producto + "'" + "and mesa='" + mesa + "'";
-            AmltpvView.util.log(s);
+            System.out.println(s);
             rs = stat.executeQuery(s);
             rs.next();
             return rs.getInt(1);
@@ -752,7 +752,7 @@ public class DataBase {
                 stat.close();
                 rs.close();
                 conn.close();
-                AmltpvView.util.log("Derby objects closed");
+                System.out.println("Derby objects closed");
             } catch (SQLException ex) {
                 Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -765,7 +765,7 @@ public class DataBase {
         Statement stat = conectar();
         try{
             s = "SELECT count(producto) from mesas_pool WHERE mesa='" + mesa + "'";
-            AmltpvView.util.log(s);
+            System.out.println(s);
             rs = stat.executeQuery(s);
             rs.next();
             return rs.getInt(1);
@@ -779,7 +779,7 @@ public class DataBase {
                 stat.close();
                 rs.close();
                 conn.close();
-                AmltpvView.util.log("Derby objects closed");
+                System.out.println("Derby objects closed");
             } catch (SQLException ex) {
                 Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -790,7 +790,7 @@ public class DataBase {
         Statement stat = conectar();
         try{
             String s = "INSERT INTO conf VALUES('"+ campo + "','" + valor + "')";
-            AmltpvView.util.log(s);
+            System.out.println(s);
             stat.execute(s);
         }
         catch (SQLException e){
@@ -800,7 +800,7 @@ public class DataBase {
             try {
                 stat.close();
                 conn.close();
-                AmltpvView.util.log("Derby objects closed");
+                System.out.println("Derby objects closed");
             } catch (SQLException ex) {
                 Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -814,10 +814,10 @@ public class DataBase {
         Statement stat2 = conectar();
         try{
             String s = "INSERT INTO auth VALUES('"+ usuario + "','" + codigo + "')";
-            //AmltpvView.util.log(s); por seguridad no imprimimos
+            //System.out.println(s); por seguridad no imprimimos
             stat1.execute(s);
             s = "INSERT INTO roles VALUES('"+ usuario + "','" + role + "')";
-            //AmltpvView.util.log(s); por seguridad no imprimimos
+            //System.out.println(s); por seguridad no imprimimos
             stat2.execute(s);
         }
         catch (SQLException e){
@@ -828,7 +828,7 @@ public class DataBase {
                 stat1.close();
                 stat2.close();
                 conn.close();
-                AmltpvView.util.log("Derby objects closed");
+                System.out.println("Derby objects closed");
             } catch (SQLException ex) {
                 Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -840,7 +840,7 @@ public class DataBase {
         Statement stat = conectar();
         try{
             String s = "INSERT INTO roles_disponibles VALUES('"+role+"',"+peso+")";
-            //AmltpvView.util.log(s); por seguridad no imprimimos
+            //System.out.println(s); por seguridad no imprimimos
             stat.execute(s);
         }
         catch (SQLException e){
@@ -850,7 +850,7 @@ public class DataBase {
             try {
                 stat.close();
                 conn.close();
-                AmltpvView.util.log("Derby objects closed");
+                System.out.println("Derby objects closed");
             } catch (SQLException ex) {
                 Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -860,7 +860,7 @@ public class DataBase {
         Statement stat = conectar();
         try{
             String s = "UPDATE conf SET valor='"+valor+"' WHERE campo='"+campo+"'";
-            AmltpvView.util.log(s);
+            System.out.println(s);
             stat.execute(s);
         }
         catch (SQLException e){
@@ -870,7 +870,7 @@ public class DataBase {
             try {
                 stat.close();
                 conn.close();
-                AmltpvView.util.log("Derby objects closed");
+                System.out.println("Derby objects closed");
             } catch (SQLException ex) {
                 Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -882,7 +882,7 @@ public class DataBase {
         Statement stat = conectar();
         try{
             String s = "SELECT valor from conf WHERE campo='" + campo + "'";
-            AmltpvView.util.log(s);
+            System.out.println(s);
             rs = stat.executeQuery(s);
             rs.next();
             return rs.getString("valor");
@@ -896,7 +896,7 @@ public class DataBase {
                 stat.close();
                 rs.close();
                 conn.close();
-                AmltpvView.util.log("Derby objects closed");
+                System.out.println("Derby objects closed");
             } catch (SQLException ex) {
                 Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -907,7 +907,7 @@ public class DataBase {
         Statement stat = conectar();
         try{
             String s = "SELECT codigo from auth WHERE usuario='" + usuario + "'";
-            AmltpvView.util.log(s);
+            System.out.println(s);
             rs = stat.executeQuery(s);
             rs.next();
             return rs.getString("codigo");
@@ -921,7 +921,7 @@ public class DataBase {
                 stat.close();
                 rs.close();
                 conn.close();
-                AmltpvView.util.log("Derby objects closed");
+                System.out.println("Derby objects closed");
             } catch (SQLException ex) {
                 Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -932,7 +932,7 @@ public class DataBase {
         Statement stat = conectar();
         try{
             String s = "SELECT role from roles WHERE usuario='" + usuario + "'";
-            AmltpvView.util.log(s);
+            System.out.println(s);
             rs = stat.executeQuery(s);
             rs.next();
             return rs.getString("role");
@@ -946,7 +946,7 @@ public class DataBase {
                 stat.close();
                 rs.close();
                 conn.close();
-                AmltpvView.util.log("Derby objects closed");
+                System.out.println("Derby objects closed");
             } catch (SQLException ex) {
                 Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -958,7 +958,7 @@ public class DataBase {
         Statement stat = conectar();
         try{
             String s = "SELECT peso from roles_disponibles WHERE role='" + role + "'";
-            AmltpvView.util.log(s);
+            System.out.println(s);
             rs = stat.executeQuery(s);
             rs.next();
             return rs.getBigDecimal("peso");
@@ -972,7 +972,7 @@ public class DataBase {
                 stat.close();
                 rs.close();
                 conn.close();
-                AmltpvView.util.log("Derby objects closed");
+                System.out.println("Derby objects closed");
             } catch (SQLException ex) {
                 Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -987,7 +987,7 @@ public class DataBase {
             rs = stat.executeQuery(s);
             rs.next();
             int length = rs.getInt(1);
-            AmltpvView.util.log(length);
+            System.out.println(length);
 
             s = "SELECT usuario from auth";
             rs = stat.executeQuery(s);
@@ -996,7 +996,7 @@ public class DataBase {
 
             while (rs.next()){
                 a[i] = rs.getString("usuario");
-                AmltpvView.util.log(a[i]);
+                System.out.println(a[i]);
                 i = i+1;
             }
             return a;
@@ -1010,7 +1010,7 @@ public class DataBase {
                 stat.close();
                 rs.close();
                 conn.close();
-                AmltpvView.util.log("Derby objects closed");
+                System.out.println("Derby objects closed");
             } catch (SQLException ex) {
                 Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1026,7 +1026,7 @@ public class DataBase {
             rs = stat.executeQuery(s);
             rs.next();
             int length = rs.getInt(1);
-            AmltpvView.util.log(length);
+            System.out.println(length);
 
             s = "SELECT role from roles_disponibles";
             rs = stat.executeQuery(s);
@@ -1035,7 +1035,7 @@ public class DataBase {
 
             while (rs.next()){
                 a[i] = rs.getString("role");
-                AmltpvView.util.log(a[i]);
+                System.out.println(a[i]);
                 i = i+1;
             }
             return a;
@@ -1049,7 +1049,7 @@ public class DataBase {
                 stat.close();
                 rs.close();
                 conn.close();
-                AmltpvView.util.log("Derby objects closed");
+                System.out.println("Derby objects closed");
             } catch (SQLException ex) {
                 Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1061,7 +1061,7 @@ public class DataBase {
         Statement stat = conectar();
         try{
             String s = "UPDATE mesas_pool  SET mesa='"+target+"' WHERE mesa='"+source+"'";
-            AmltpvView.util.log(s);
+            System.out.println(s);
             stat.execute(s);
         }
         catch (SQLException e){
@@ -1071,7 +1071,7 @@ public class DataBase {
             try {
                 stat.close();
                 conn.close();
-                AmltpvView.util.log("Derby objects closed");
+                System.out.println("Derby objects closed");
                 ThreadServidor.servidor.propagate("moverMesaCocina", source+":"+target);
             } catch (SQLException ex) {
                 Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
@@ -1082,11 +1082,11 @@ public class DataBase {
     void shutdown() {
         try {
             DriverManager.getConnection("jdbc:derby:" + dbName + ";shutdown=true");
-            AmltpvView.util.log("No se ha podido cerrar la base de Datos");
+            System.out.println("No se ha podido cerrar la base de Datos");
 
         } catch (SQLException ex) {
-            AmltpvView.util.log("Base de datos cerrada");
-            AmltpvView.util.log(ex.toString());
+            System.out.println("Base de datos cerrada");
+            System.out.println(ex.toString());
         }
     }
 

@@ -4,7 +4,6 @@
 
 package amltpv;
 
-import java.awt.SplashScreen;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
 
@@ -42,9 +41,9 @@ public class AmltpvApp extends SingleFrameApplication {
     public static void main(String[] args) {
 //        SplashScreen splash = SplashScreen.getSplashScreen();
 //        if(splash==null)
-//            AmltpvView.util.log("It was null!!");
+//            System.out.println("It was null!!");
 //        else
-//            AmltpvView.util.log("It wasn't null!!!");
+//            System.out.println("It wasn't null!!!");
         launch(AmltpvApp.class, args);
     }
 }

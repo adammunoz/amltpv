@@ -20,7 +20,7 @@ public class TreeStorer {
         try {
             encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(XMLFILENAME)));
         } catch (FileNotFoundException ex) {
-            AmltpvView.util.log(ex.toString());
+            System.out.println(ex.toString());
             AmltpvView.util.setStatus(ex.toString());
         }
         encoder.writeObject(tree);
@@ -36,7 +36,7 @@ public class TreeStorer {
             decoder.close();
             return m;
         } catch (FileNotFoundException ex) {
-            AmltpvView.util.log(ex.toString());
+            System.out.println(ex.toString());
             AmltpvView.util.setStatus(ex.toString());
             return null;
         }

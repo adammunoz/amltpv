@@ -23,7 +23,7 @@ public class Servidor {
     static Vector<ConnectionThread> connectedClients = new Vector();
     ConnectionThread connection;
     Servidor(){
-        AmltpvView.util.log("Servidor en puerto 8");
+        System.out.println("Servidor en puerto 8");
         try {
             serverSocket = new ServerSocket(8);
         } catch (IOException e) {
@@ -35,7 +35,7 @@ public class Servidor {
         while (true){
         try {
              connection = new ConnectionThread(serverSocket.accept());
-             AmltpvView.util.log("Conexion con servidor principal aceptada");
+             System.out.println("Conexion con servidor principal aceptada");
              Thread t = new Thread(connection);
              connectedClients.add(connection);
              t.start();
@@ -64,7 +64,7 @@ public class Servidor {
     }
 
     void propagate(String operation, String operand){
-        AmltpvView.util.log("Propagating "+ operation + "@" + operand);
+        System.out.println("Propagating "+ operation + "@" + operand);
         Iterator iter = connectedClients.iterator();
             ConnectionThread con;
             while (iter.hasNext()){

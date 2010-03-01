@@ -396,7 +396,7 @@ public class AmltpvView extends FrameView {
                 objServer = new ObjectServer();
                 objServerMobile = new ObjectServerMobile();
             } catch (Exception ex) {
-                AmltpvView.util.log(ex.toString());
+                System.out.println(ex.toString());
             }
             if (cajaCerrada.equals("true") || cajaCerrada.equals("nulo")){
                 AmltpvView.db.addApertura();
@@ -480,15 +480,14 @@ class ButtonHandler implements ActionListener{
         //sourceButton.setIcon(new ImageIcon("imgs/mesaBusy.jpg"));
         int numMesa = Integer.parseInt(sourceButton.getText());
         if (ConnectionThread.mesasOcupadas.contains(Integer.toString(numMesa))){
-           JOptionPane.showMessageDialog(AmltpvView.util.getMainFrame(),"Esta mesa esta siendo procesada en otra ordenador"); 
+           JOptionPane.showMessageDialog(AmltpvView.util.getMainFrame(),"Esta mesa esta siendo procesada en otro ordenador." +
+                   "Por favor no haga cambios");
         }
-        else{
-            ConnectionThread.mesasOcupadas.add(new Integer(numMesa).toString());
-            ThreadServidor.servidor.propagate("mesaOcupada",new Integer(numMesa).toString());
-            VentasDialogScreen ventasScreen = new VentasDialogScreen(AmltpvView.util.getMainFrame(),true,numMesa);
-            ventasScreen.setTitle("Mesa "+numMesa);
-            ventasScreen.setLocationRelativeTo(AmltpvView.util.getMainFrame());
-            ventasScreen.setVisible(true);
-        }
+        ConnectionThread.mesasOcupadas.add(new Integer(numMesa).toString());
+        ThreadServidor.servidor.propagate("mesaOcupada",new Integer(numMesa).toString());
+        VentasDialogScreen ventasScreen = new VentasDialogScreen(AmltpvView.util.getMainFrame(),true,numMesa);
+        ventasScreen.setTitle("Mesa "+numMesa);
+        ventasScreen.setLocationRelativeTo(AmltpvView.util.getMainFrame());
+        ventasScreen.setVisible(true);
     }
 }

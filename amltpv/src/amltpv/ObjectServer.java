@@ -16,15 +16,16 @@ public class ObjectServer extends Thread{
     ServerSocket objectServer;
     public ObjectServer() throws Exception {
         objectServer = new ServerSocket(3000);
-        AmltpvView.util.log("Object Server started");
+        System.out.println("Object Server started");
         this.start();
    }
 
    public void run() {
      while(true) {
        try {
-        AmltpvView.util.log("Waiting for connections server.");
+        System.out.println("Waiting for connections to object server.");
         Socket client = objectServer.accept();
+        System.out.println("Aceptada conexion a object server");
         ObjectServerThread c = new ObjectServerThread(client);
        } catch(Exception e) {}
      }

@@ -44,7 +44,7 @@ public class ConnectionThread implements Runnable{
             in = new BufferedReader(new InputStreamReader(socket.getInputStream(),"UTF-8"));
         }
         catch (IOException ex) {
-            AmltpvView.util.log(ex.toString());
+            System.out.println(ex.toString());
         }
     }
 
@@ -56,7 +56,7 @@ public class ConnectionThread implements Runnable{
     }
 
     void sendMsg(String msg){
-        AmltpvView.util.log("Sending:"+msg);
+        System.out.println("Sending:"+msg);
         out.println(msg);
     }
 
@@ -65,7 +65,7 @@ public class ConnectionThread implements Runnable{
     
 
     private void decode(String msg) {
-        AmltpvView.util.log("client says:"+msg);
+        System.out.println("client says:"+msg);
         String operation = "";
         String operand = "";
 
@@ -90,10 +90,10 @@ public class ConnectionThread implements Runnable{
         }
         else if (operation.equals("dbQuery")){
             busy = true;
-            AmltpvView.util.log("Database operation identified");
+            System.out.println("Database operation identified");
             String answeredQuery = AmltpvView.db.decodeRemoteQuery(operand);
             sendMsg(answeredQuery);
-            AmltpvView.util.log("server is free now");
+            System.out.println("server is free now");
             busy = false;
         }
         else if (operation.equals("clientMesaInsert")){
@@ -117,7 +117,7 @@ public class ConnectionThread implements Runnable{
             sendMsg("done:"+operation);
         }
         else if (operation.equals("moverMesa")){
-            AmltpvView.util.log("Mover mesa operation identified");
+            System.out.println("Mover mesa operation identified");
             String[] b = operand.split(":");
             String source = b[0];
             String target = b[1];
@@ -128,44 +128,44 @@ public class ConnectionThread implements Runnable{
             decode("mesaCerrada@"+ source);
         }
         else if (operation.equals("mesaCambiada")){
-            AmltpvView.util.log("Mesa cambiada operation identified");
+            System.out.println("Mesa cambiada operation identified");
             ThreadServidor.servidor.propagate(operation,operand);
             AmltpvView.changeMesasIcon(operand,new ImageIcon("imgs/mesaBusy.jpg"));
             sendMsg("done:"+operation);
         }
         else if (operation.equals("mesaLiberada")){
-            AmltpvView.util.log("Mesa liberada operation identified");
+            System.out.println("Mesa liberada operation identified");
             ThreadServidor.servidor.propagate(operation,operand);
             AmltpvView.changeMesasIcon(operand,new ImageIcon("imgs/mesa.jpg"));
             sendMsg("done:"+operation);
         }
         else if (operation.equals("mesaOcupada")){
-            AmltpvView.util.log("Mesa ocupada operation identified");
+            System.out.println("Mesa ocupada operation identified");
             mesasOcupadas.add(operand);
             ThreadServidor.servidor.propagate(operation,operand);
             sendMsg("done:"+operation);
         }
         else if (operation.equals("mesaCerrada")){
-            AmltpvView.util.log("Mesa cerrada operation identified");
+            System.out.println("Mesa cerrada operation identified");
             mesasOcupadas.remove(operand);
             sendMsg("done:"+operation);
             ThreadServidor.servidor.propagate(operation,operand);
             
         }
         else if (operation.equals("mesaServida")){
-            AmltpvView.util.log("Mesa servida operation identified");
+            System.out.println("Mesa servida operation identified");
             AmltpvView.changeMesasIcon(operand,new ImageIcon("imgs/mesaBusyServida.jpg"));
             ThreadServidor.servidor.propagate(operation,operand);
             sendMsg("done:"+operation);
 
         }
         else if(operation.equals("fromPoolToCobradas")){
-            AmltpvView.util.log("fromPoolToCobradas operation identified");
+            System.out.println("fromPoolToCobradas operation identified");
             AmltpvView.db.fromPoolToCobradas(operand);
             sendMsg("done:"+operation);
         }
         else if(operation.equals("emptyPool")){
-            AmltpvView.util.log("emptyPool operation identified");
+            System.out.println("emptyPool operation identified");
             AmltpvView.db.emptyPool(operand);
             sendMsg("done:"+operation);
             AmltpvView.changeMesasIcon(operand,new ImageIcon("imgs/mesa.jpg"));
@@ -173,7 +173,7 @@ public class ConnectionThread implements Runnable{
         }
 
         else{
-            AmltpvView.util.log("NO OPERATION IDENTIFIED. SENDING NULL...");
+            System.out.println("NO OPERATION IDENTIFIED. SENDING NULL...");
             sendMsg(null);
         }
     }
@@ -185,7 +185,7 @@ public class ConnectionThread implements Runnable{
             socket.close();
             socket.close();
         } catch (IOException ex) {
-            AmltpvView.util.log(ex.toString());
+            System.out.println(ex.toString());
         }
     }
 }

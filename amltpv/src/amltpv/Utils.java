@@ -53,7 +53,7 @@ public class Utils {
         setStatus(oldText +" - " +s);
     }
     public boolean existeArchivo(String archivo) {
-        AmltpvView.util.log("Existe? "+archivo);
+        System.out.println("Existe? "+archivo);
         File f = new File(archivo);
         return f.exists()? true : false;
     }
@@ -104,8 +104,8 @@ public class Utils {
 
     public void persistSetting(String setting,String value){
         if (existeArchivo("settings/"+setting+".txt")){
-            AmltpvView.util.log("Existe el archivo y lo vamos a borrar");
-            AmltpvView.util.log(
+            System.out.println("Existe el archivo y lo vamos a borrar");
+            System.out.println(
                     FileUtils.deleteQuietly(new File("settings/"+setting+".txt")));
             
         }
