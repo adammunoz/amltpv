@@ -19,13 +19,14 @@ import javax.swing.JOptionPane;
  * @author adam
  */
 public class Servidor {
+    private final static int PORT = 8001;
     private ServerSocket serverSocket;
     static Vector<ConnectionThread> connectedClients = new Vector();
     ConnectionThread connection;
     Servidor(){
-        System.out.println("Servidor en puerto 8");
+        System.out.println("Servidor en puerto " + PORT);
         try {
-            serverSocket = new ServerSocket(8);
+            serverSocket = new ServerSocket(PORT);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null,"No se puede abrir el puerto");
         }

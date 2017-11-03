@@ -14,13 +14,14 @@ import javax.swing.JOptionPane;
  * @author adam
  */
 public class TemporaryConnectionServidor {
+    private final static int PORT = 8000;
     private ServerSocket serverSocket;
     private ConnectionThread connection;
 
     TemporaryConnectionServidor(){
-        System.out.println("Servidor temporal en puerto 7");
+        System.out.println("Servidor temporal en puerto " + PORT);
         try {
-            serverSocket = new ServerSocket(7);
+            serverSocket = new ServerSocket(PORT);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null,"No se puede abrir el puerto");
         }
