@@ -1,0 +1,10 @@
+----------------------------------------------------------------
+2017-11-03 05:41:47.139 GMT:
+ Booting Derby version The Apache Software Foundation - Apache Derby - 10.4.2.0 - (689064): instance a816c00e-015f-8066-2e31-0000069423c0
+on database directory /Users/makyn/workspace/amltpv/amltpv/baseDeDatos  
+
+Database Class Loader started - derby.database.classpath=''
+
+2017-11-03 05:42:36.543 GMT:
+Shutting down instance a816c00e-015f-8066-2e31-0000069423c0
+----------------------------------------------------------------
